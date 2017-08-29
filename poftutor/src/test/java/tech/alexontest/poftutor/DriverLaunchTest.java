@@ -2,6 +2,7 @@ package tech.alexontest.poftutor;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -33,6 +34,7 @@ public class DriverLaunchTest {
         System.out.println("Driver Started");
     }
 
+    @Ignore
     @Test
     public void webdriverCanBeStarted() {
         //load my homepage
