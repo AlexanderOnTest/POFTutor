@@ -1,21 +1,5 @@
 group 'tech.alexontest'
 version '1.0-SNAPSHOT'
-buildscript {
-    repositories { mavenCentral()
-    }
-
-    dependencies {
-        classpath 'org.junit.platform:junit-platform-gradle-plugin:1.0.0-RC3'
-    }
-}
-
-apply plugin: 'org.junit.platform.gradle.plugin'
-
-junitPlatform {
-    platformVersion '1.0.0-RC3'
-    reportsDir file('build/test-results/junit-platform')
-    //enableStandardTestTask true
-}
 
 apply plugin: 'java'
 

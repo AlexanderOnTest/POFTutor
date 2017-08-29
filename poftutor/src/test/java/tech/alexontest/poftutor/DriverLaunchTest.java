@@ -2,7 +2,6 @@ package tech.alexontest.poftutor;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -11,7 +10,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class DriverLaunchTest {
     private WebDriver driver;
@@ -34,15 +33,14 @@ public class DriverLaunchTest {
         System.out.println("Driver Started");
     }
 
-    @Ignore
     @Test
     public void webdriverCanBeStarted() {
         //load my homepage
         driver.get("https://alexanderontesting.com/");
 
         //confirm the title text is correct
-        assertEquals("Alexander On Testing", driver.findElement(By.cssSelector(".site-title")).getText());
-
+        assertThat(driver.findElement(By.cssSelector(".site-title")).getText())
+                .isEqualToIgnoringCase("Alexander on Testing");
     }
 
     @After
