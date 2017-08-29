@@ -1,0 +1,37 @@
+group 'tech.alexontest'
+version '1.0-SNAPSHOT'
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'org.junit.platform:junit-platform-gradle-plugin:1.0.0-RC2'
+    }
+}
+
+apply plugin: 'org.junit.platform.gradle.plugin'
+
+junitPlatform {
+    platformVersion '1.0.0-RC2'
+    reportsDir file('build/test-results/junit-platform')
+    //enableStandardTestTask true
+}
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.5.1'
+
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.0.0-RC2'
+    testCompile group: 'org.junit.platform', name: 'junit-platform-launcher', version: '1.0.0-RC2'
+    testRuntime group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.0.0-RC2'
+    testRuntime group: 'org.junit.vintage', name: 'junit-vintage-engine', version: '4.12.0-RC2'
+}
