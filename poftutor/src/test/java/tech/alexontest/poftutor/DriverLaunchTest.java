@@ -10,7 +10,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class DriverLaunchTest {
     private WebDriver driver;
@@ -39,8 +39,8 @@ public class DriverLaunchTest {
         driver.get("https://alexanderontesting.com/");
 
         //confirm the title text is correct
-        assertEquals("Alexander On Testing", driver.findElement(By.cssSelector(".site-title")).getText());
-
+        assertThat(driver.findElement(By.cssSelector(".site-title")).getText())
+                .isEqualToIgnoringCase("Alexander on Testing");
     }
 
     @After
