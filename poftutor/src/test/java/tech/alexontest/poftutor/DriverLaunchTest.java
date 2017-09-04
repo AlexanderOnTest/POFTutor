@@ -1,13 +1,13 @@
 package tech.alexontest.poftutor;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import tech.alexontest.poftutor.infrastructure.AbstractTest;
+import tech.alexontest.poftutor.infrastructure.AbstractSingleDriverTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class DriverLaunchTest extends AbstractTest {
+public class DriverLaunchTest extends AbstractSingleDriverTest {
     private WebDriver driver;
     private String homePageURL = "https://alexanderontesting.com/";
 
