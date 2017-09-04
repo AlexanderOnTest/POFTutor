@@ -1,52 +1,50 @@
 package tech.alexontest.poftutor;
 
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
+import tech.alexontest.poftutor.infrastructure.AbstractTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class DriverLaunchTest {
+public class DriverLaunchTest extends AbstractTest {
     private WebDriver driver;
+    private String homePageURL = "https://alexanderontesting.com/";
 
-    @Before
-    @BeforeEach
-    public void setup() {
-        //launch a chromedriver
-        System.out.println("Preparing Driver");
-
-        //find the chromedriver and set its location in a system property
-        ClassLoader classLoader = getClass().getClassLoader();
-        String path = classLoader.getResource("chromedriver.exe").getPath();
-        System.setProperty("webdriver.chrome.driver", path);
-
-        //the chromeoptions we can explore later, but this will maximise it on startup
-        ChromeOptions chromeOptions = new ChromeOptions();
-        chromeOptions.addArguments("--start-maximized");
-        driver = new ChromeDriver(chromeOptions);
-        System.out.println("Driver Started");
+    @Test
+    public void urlIsCorrect() {
+        setupHomepage();
+        assertThat(driver.getCurrentUrl())
+                .isEqualToIgnoringCase(homePageURL);
     }
 
     @Test
-    public void webdriverCanBeStarted() {
-        //load my homepage
-        driver.get("https://alexanderontesting.com/");
+    public void httpRewriteIsWorking() {
+        driver = getDriver();
+        driver.get("http://alexanderontesting.com/");
+        assertThat(driver.getCurrentUrl())
+                .isEqualToIgnoringCase(homePageURL);
+    }
+
+    @Test
+    public void titleIsCorrect() {
+        setupHomepage();
 
         //confirm the title text is correct
         assertThat(driver.findElement(By.cssSelector(".site-title")).getText())
                 .isEqualToIgnoringCase("Alexander on Testing");
     }
 
-    @After
-    @AfterEach
-    public void teardown() {
-        //close the webdriver
-        driver.quit();
+    @Test
+    public void pageContainsFiveWidgets() {
+        setupHomepage();
+        assertThat(driver.findElements(By.cssSelector(".widget")))
+                .size()
+                .isEqualTo(5);
+    }
+
+    private void setupHomepage() {
+        driver = getDriver();
+        driver.get(homePageURL);
     }
 }
