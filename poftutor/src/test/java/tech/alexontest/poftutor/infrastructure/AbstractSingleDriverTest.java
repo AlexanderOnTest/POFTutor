@@ -1,5 +1,7 @@
 package tech.alexontest.poftutor.infrastructure;
 
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.TestInstance;
@@ -11,10 +13,11 @@ import org.openqa.selenium.chrome.ChromeOptions;
  * Abstract test class that reuses the same WebDriver for all tests.
  * Only supports JUnit 5 tests.
  */
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+//@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 abstract public class AbstractSingleDriverTest {
     private WebDriver driver;
 
+    @BeforeClass
     @BeforeAll
     public void setup() {
         //launch a chromedriver
@@ -32,6 +35,7 @@ abstract public class AbstractSingleDriverTest {
         System.out.println("Driver Started");
     }
 
+    @AfterClass
     @AfterAll
     public void teardown() {
         //close the webdriver
