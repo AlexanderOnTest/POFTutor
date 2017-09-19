@@ -5,8 +5,8 @@ import org.junit.Before;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
+
+import static tech.alexontest.poftutor.infrastructure.DriverType.CHROME;
 
 /**
  * Abstract Test class that creates a new WebDriver for Each Test.
@@ -14,30 +14,22 @@ import org.openqa.selenium.chrome.ChromeOptions;
  */
 abstract public class AbstractTest {
     private WebDriver driver;
+    private AbstractDriverManager driverManager;
 
     @Before
     @BeforeEach
     public void setup() {
-        //launch a chromedriver
-        System.out.println("Preparing Driver");
-
-        //find the chromedriver and set its location in a system property
-        ClassLoader classLoader = getClass().getClassLoader();
-        String path = classLoader.getResource("chromedriver.exe").getPath();
-        System.setProperty("webdriver.chrome.driver", path);
-
-        //the chromeoptions we can explore later, but this will maximise it on startup
-        ChromeOptions chromeOptions = new ChromeOptions();
-        chromeOptions.addArguments("--start-maximized");
-        driver = new ChromeDriver(chromeOptions);
-        System.out.println("Driver Started");
+        System.out.println("Preparing AbstractDriverManager");
+        driverManager = DriverManagerFactory.getManager(CHROME);
+        System.out.println("Getting Driver");
+        driver = driverManager.getDriver();
     }
 
     @After
     @AfterEach
     public void teardown() {
-        //close the webdriver
-        driver.quit();
+        System.out.println("Quiting Driver");
+        driverManager.quitDriver();
     }
 
     protected WebDriver getDriver() {

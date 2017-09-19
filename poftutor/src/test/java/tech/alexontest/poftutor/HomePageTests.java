@@ -4,7 +4,6 @@ import org.junit.Before;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.PageFactory;
 import tech.alexontest.poftutor.infrastructure.AbstractTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
