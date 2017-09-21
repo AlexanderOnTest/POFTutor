@@ -3,11 +3,10 @@ package tech.alexontest.poftutor.infrastructure;
 import org.openqa.selenium.WebDriver;
 
 public abstract class AbstractDriverManager {
-
     protected WebDriver driver;
     protected abstract void startService();
     protected abstract void stopService();
-    protected abstract void createDriver();
+    public abstract String createDriver();
 
     public void quitDriver() {
         if (null != driver) {

@@ -11,10 +11,12 @@ package tech.alexontest.poftutor.infrastructure;
 public class ChromeDriverManager extends AbstractDriverManager {
 
     private ChromeDriverService chromeDriverService;
-    private File chromedriverExe;
+    private final File chromedriverExe;
 
     ChromeDriverManager() {
-        chromedriverExe = new File(getClass().getClassLoader().getResource("chromedriver.exe").getPath());
+        final String path = getClass().getClassLoader().getResource("chromedriver.exe").getPath();
+        chromedriverExe = new File(path);
+        System.setProperty("webdriver.chrome.driver", path);
     }
 
     @Override
@@ -39,12 +41,15 @@ public class ChromeDriverManager extends AbstractDriverManager {
     }
 
     @Override
-    public void createDriver() {
-        DesiredCapabilities capabilities = DesiredCapabilities.chrome();
-        ChromeOptions options = new ChromeOptions();
+    public String createDriver() {
+        final DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+        // add capabilities
+        final ChromeOptions options = new ChromeOptions();
+        // add options
         options.addArguments("test-type", "--start-maximized");
         capabilities.setCapability(ChromeOptions.CAPABILITY, options);
         System.out.println("Driver Started");
-        driver = new ChromeDriver(chromeDriverService, capabilities);
+        driver = new ChromeDriver(capabilities);
+        return capabilities.getBrowserName();
     }
 }

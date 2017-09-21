@@ -6,8 +6,6 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
 
-import static tech.alexontest.poftutor.infrastructure.DriverType.CHROME;
-
 /**
  * Abstract Test class that creates a new WebDriver for Each Test.
  * Supports JUnit 4 and JUnit 5 tests.
@@ -20,7 +18,7 @@ abstract public class AbstractTest {
     @BeforeEach
     public void setup() {
         System.out.println("Preparing AbstractDriverManager");
-        driverManager = DriverManagerFactory.getManager(CHROME);
+        driverManager = DriverManagerFactory.getManager(DriverType.CHROME);
         System.out.println("Getting Driver");
         driver = driverManager.getDriver();
     }
@@ -30,6 +28,7 @@ abstract public class AbstractTest {
     public void teardown() {
         System.out.println("Quiting Driver");
         driverManager.quitDriver();
+        driverManager.stopService();
     }
 
     protected WebDriver getDriver() {
