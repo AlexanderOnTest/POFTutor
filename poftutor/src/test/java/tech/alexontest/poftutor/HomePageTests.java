@@ -2,8 +2,7 @@ package tech.alexontest.poftutor;
 
 import org.junit.Before;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.Test;
-import org.openqa.selenium.WebDriver;
+import org.junit.jupiter.api.Test;
 import tech.alexontest.poftutor.infrastructure.AbstractTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -14,10 +13,8 @@ public class HomePageTests extends AbstractTest {
     @BeforeEach
     @Before
     public void setupHomepage() {
-        final WebDriver driver = getDriver();
-        driver.get("https://alexanderontesting.com/");
-        //homePage = new PomHomePage(driver);                            //Classic implementation
-        homePage = new PfHomePage(driver);                             //Page Factory implementation
+        //homePage = new PomHomePage("https://alexanderontesting.com/");                            //Classic implementation
+        homePage = new PfHomePage(getDriver("https://alexanderontesting.com/"));                             //Page Factory implementation
     }
 
     @Test

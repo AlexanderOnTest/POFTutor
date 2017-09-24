@@ -1,7 +1,6 @@
 package tech.alexontest.poftutor;
 
-import org.junit.Test;
-import org.openqa.selenium.WebDriver;
+import org.junit.jupiter.api.Test;
 import tech.alexontest.poftutor.infrastructure.AbstractCrossBrowserTest;
 import tech.alexontest.poftutor.infrastructure.DriverManagerFactory;
 import tech.alexontest.poftutor.infrastructure.DriverType;
@@ -10,7 +9,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assume.*;
 
 public class DriverFactoryTests extends AbstractCrossBrowserTest{
-    private final String homePageURL = "https://www.bbc.co.uk/";
+    private final String homePageURL = "https://alexanderontesting.com/";
     private final String OS = System.getProperty("os.name");
 
     @Test
@@ -40,9 +39,7 @@ public class DriverFactoryTests extends AbstractCrossBrowserTest{
         assertThat(getDriverManager().createDriver())
                 .as("Checking That browser is of type %s", browserName)
         .isEqualToIgnoringCase(browserName);
-        WebDriver driver = getDriverManager().getDriver();
-        driver.get(homePageURL);
-        assertThat(driver.getCurrentUrl())
+        assertThat(getDriver(homePageURL).getCurrentUrl())
                 .isEqualToIgnoringCase(homePageURL);
     }
 }

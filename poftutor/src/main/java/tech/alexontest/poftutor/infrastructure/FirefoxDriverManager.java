@@ -7,8 +7,9 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.logging.Level;
 
-public class FirefoxDriverManager extends AbstractDriverManager {
+public class FirefoxDriverManager extends AbstractDriverManager implements WebDriverManager {
     private GeckoDriverService geckoDriverService;
     private File geckoDriverExe;
 
@@ -35,6 +36,7 @@ public class FirefoxDriverManager extends AbstractDriverManager {
 
     @Override
     public void stopService() {
+        quitDriver();
         if (null != geckoDriverService && geckoDriverService.isRunning())
             geckoDriverService.stop();
     }
@@ -43,10 +45,10 @@ public class FirefoxDriverManager extends AbstractDriverManager {
     public String createDriver() {
         final DesiredCapabilities capabilities = DesiredCapabilities.firefox();
         // add capabilities
-        final FirefoxOptions options = new FirefoxOptions();
+        final FirefoxOptions options = new FirefoxOptions().setLogLevel(Level.OFF);
         // add options
         options.addCapabilities(capabilities);
-        driver = new FirefoxDriver(options);
+        driver = new FirefoxDriver(capabilities);
         System.out.println("Driver Started");
         return capabilities.getBrowserName();
     }

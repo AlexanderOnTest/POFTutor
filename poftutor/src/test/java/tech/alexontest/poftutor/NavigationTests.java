@@ -1,48 +1,41 @@
 package tech.alexontest.poftutor;
 
 import org.junit.Ignore;
-import org.junit.Test;
-import org.openqa.selenium.WebDriver;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
+import tech.alexontest.poftutor.infrastructure.AbstractSingleDriverTest;
 import tech.alexontest.poftutor.infrastructure.AbstractTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class NavigationTests extends AbstractTest {
-    private WebDriver driver;
+public class NavigationTests extends AbstractSingleDriverTest {
     private final String homePageURL = "https://alexanderontesting.com/";
-
-    public void setupHomepage(final String URL) {
-        driver = getDriver();
-        driver.get(URL);
-    }
 
     @Test
     public void urlIsCorrect() {
-        setupHomepage(homePageURL);
-        assertThat(driver.getCurrentUrl())
+        assertThat(getDriver(homePageURL).getCurrentUrl())
                 .isEqualToIgnoringCase(homePageURL);
     }
 
     @Test
     public void httpRewriteIsWorking() {
-        setupHomepage("http://alexanderontesting.com/");
-        assertThat(driver.getCurrentUrl())
+        assertThat(getDriver("http://alexanderontesting.com/").getCurrentUrl())
                 .isEqualToIgnoringCase(homePageURL);
     }
 
+    @Disabled
     @Ignore //not yet implemented
     @Test
     public void alexOnTestHttpRewriteIsWorking() {
-        setupHomepage("http://alexontest.tech/");
-        assertThat(driver.getCurrentUrl())
+        assertThat(getDriver("http://alexontest.tech/").getCurrentUrl())
                 .isEqualToIgnoringCase(homePageURL);
     }
 
+    @Disabled
     @Ignore //not yet implemented
     @Test
     public void alexOnTestHttpsRewriteIsWorking() {
-        setupHomepage("https://alexontest.tech/");
-        assertThat(driver.getCurrentUrl())
+        assertThat(getDriver("https://alexontest.tech/").getCurrentUrl())
                 .isEqualToIgnoringCase(homePageURL);
     }
 }

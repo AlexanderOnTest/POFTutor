@@ -8,7 +8,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import java.io.File;
 import java.io.IOException;
 
-public class EdgeDriverManager extends AbstractDriverManager {
+public class EdgeDriverManager extends AbstractDriverManager implements WebDriverManager {
 
     private EdgeDriverService edgeDriverService;
     private File edgeDriverExe;
@@ -36,6 +36,7 @@ public class EdgeDriverManager extends AbstractDriverManager {
 
     @Override
     public void stopService() {
+        quitDriver();
         if (null != edgeDriverService && edgeDriverService.isRunning())
             edgeDriverService.stop();
     }

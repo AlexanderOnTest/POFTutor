@@ -8,7 +8,7 @@ package tech.alexontest.poftutor.infrastructure;
         import java.io.File;
         import java.io.IOException;
 
-public class ChromeDriverManager extends AbstractDriverManager {
+public class ChromeDriverManager extends AbstractDriverManager implements WebDriverManager {
 
     private ChromeDriverService chromeDriverService;
     private final File chromedriverExe;
@@ -36,6 +36,7 @@ public class ChromeDriverManager extends AbstractDriverManager {
 
     @Override
     public void stopService() {
+        quitDriver();
         if (null != chromeDriverService && chromeDriverService.isRunning())
             chromeDriverService.stop();
     }

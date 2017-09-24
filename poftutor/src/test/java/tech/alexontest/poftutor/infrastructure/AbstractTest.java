@@ -12,7 +12,7 @@ import org.openqa.selenium.WebDriver;
  */
 abstract public class AbstractTest {
     private WebDriver driver;
-    private AbstractDriverManager driverManager;
+    private WebDriverManager driverManager;
 
     @Before
     @BeforeEach
@@ -27,11 +27,16 @@ abstract public class AbstractTest {
     @AfterEach
     public void teardown() {
         System.out.println("Quiting Driver");
-        driverManager.quitDriver();
         driverManager.stopService();
     }
 
     protected WebDriver getDriver() {
+        return driver;
+    }
+
+    protected WebDriver getDriver(final String url) {
+        WebDriver driver = getDriver();
+        driver.get(url);
         return driver;
     }
 }

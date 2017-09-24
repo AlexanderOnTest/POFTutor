@@ -9,30 +9,30 @@ import org.openqa.selenium.WebDriver;
  * Supports JUnit 4 and JUnit 5 tests.
  */
 abstract public class AbstractCrossBrowserTest {
-    private WebDriver driver;
-    private AbstractDriverManager driverManager;
+    private WebDriverManager driverManager;
 
     @After
     @AfterEach
     public void teardown() {
         System.out.println("Quitting Driver");
-        driverManager.quitDriver();
         driverManager.stopService();
     }
 
-    protected AbstractDriverManager getDriverManager() {
+    protected WebDriverManager getDriverManager() {
         return driverManager;
     }
 
-    protected void setDriverManager(final AbstractDriverManager driverManager) {
+    protected void setDriverManager(final WebDriverManager driverManager) {
         this.driverManager = driverManager;
     }
 
     protected WebDriver getDriver() {
-        return driver;
+        return driverManager.getDriver();
     }
 
-    public void setDriver(final WebDriver driver) {
-        this.driver = driver;
+    protected WebDriver getDriver(final String url) {
+        WebDriver driver = getDriver();
+        driver.get(url);
+        return driver;
     }
 }

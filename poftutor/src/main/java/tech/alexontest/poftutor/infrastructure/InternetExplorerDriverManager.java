@@ -9,7 +9,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Map;
 
-public class InternetExplorerDriverManager extends AbstractDriverManager {
+public class InternetExplorerDriverManager extends AbstractDriverManager implements WebDriverManager {
 
     private InternetExplorerDriverService internetExplorerDriverService;
     private final File internetExplorerDriverExe;
@@ -37,6 +37,7 @@ public class InternetExplorerDriverManager extends AbstractDriverManager {
 
     @Override
     public void stopService() {
+        quitDriver();
         if (null != internetExplorerDriverService && internetExplorerDriverService.isRunning())
             internetExplorerDriverService.stop();
     }
