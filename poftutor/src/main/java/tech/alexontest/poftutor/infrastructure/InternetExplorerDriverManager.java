@@ -1,13 +1,12 @@
 package tech.alexontest.poftutor.infrastructure;
 
-import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.ie.InternetExplorerDriverService;
 import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Map;
 
 public class InternetExplorerDriverManager extends AbstractDriverManager implements WebDriverManager {
 
@@ -32,27 +31,24 @@ public class InternetExplorerDriverManager extends AbstractDriverManager impleme
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            System.out.println("InternetExplorerDriverService Started");
         }
     }
 
     @Override
     public void stopService() {
-        quitDriver();
-        if (null != internetExplorerDriverService && internetExplorerDriverService.isRunning())
+        if (null != internetExplorerDriverService && internetExplorerDriverService.isRunning()) {
             internetExplorerDriverService.stop();
+            System.out.println("InternetExplorerDriverService Stopped");
+        }
     }
 
     @Override
     public String createDriver() {
-        final DesiredCapabilities capabilities = DesiredCapabilities.internetExplorer();
-        // add capabilities
         final InternetExplorerOptions options = new InternetExplorerOptions();
-        //add options
-        for (Map.Entry<String, ?> entry : capabilities.asMap().entrySet()) {
-            options.setCapability(entry.getKey(), entry.getValue());
-        }
-        System.out.println("Driver Started");
-        driver = new InternetExplorerDriver(options);
-        return capabilities.getBrowserName();
+        //add required options here
+        driver = new RemoteWebDriver(getGridUrl(), options);
+        System.out.println("InternetExplorerDriver Started");
+        return DesiredCapabilities.internetExplorer().getBrowserName();
     }
 }

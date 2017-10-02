@@ -1,15 +1,14 @@
 package tech.alexontest.poftutor.infrastructure;
 
-import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeDriverService;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.io.File;
 import java.io.IOException;
 
 public class EdgeDriverManager extends AbstractDriverManager implements WebDriverManager {
-
     private EdgeDriverService edgeDriverService;
     private File edgeDriverExe;
 
@@ -31,25 +30,24 @@ public class EdgeDriverManager extends AbstractDriverManager implements WebDrive
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            System.out.println("EdgeDriverService Started");
         }
     }
 
     @Override
     public void stopService() {
-        quitDriver();
-        if (null != edgeDriverService && edgeDriverService.isRunning())
+        if (null != edgeDriverService && edgeDriverService.isRunning()) {
             edgeDriverService.stop();
+            System.out.println("EdgeDriverService Stopped");
+        }
     }
 
     @Override
     public String createDriver() {
-        final DesiredCapabilities capabilities = DesiredCapabilities.edge();
-        // add capabilities
         final EdgeOptions options = new EdgeOptions();
-        // add options
-        capabilities.setCapability(EdgeOptions.CAPABILITY, options);
-        System.out.println("Driver Started");
-        driver = new EdgeDriver(capabilities);
-        return capabilities.getBrowserName();
+        this.driver = new RemoteWebDriver(getGridUrl(), options);
+
+        System.out.println("EdgeDriver Started");
+        return DesiredCapabilities.edge().getBrowserName();
     }
 }

@@ -1,9 +1,9 @@
 package tech.alexontest.poftutor.infrastructure;
 
-        import org.openqa.selenium.chrome.ChromeDriver;
         import org.openqa.selenium.chrome.ChromeDriverService;
         import org.openqa.selenium.chrome.ChromeOptions;
         import org.openqa.selenium.remote.DesiredCapabilities;
+        import org.openqa.selenium.remote.RemoteWebDriver;
 
         import java.io.File;
         import java.io.IOException;
@@ -31,26 +31,25 @@ public class ChromeDriverManager extends AbstractDriverManager implements WebDri
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            System.out.println("ChromeDriverService Started");
         }
     }
 
     @Override
     public void stopService() {
-        quitDriver();
-        if (null != chromeDriverService && chromeDriverService.isRunning())
+        if (null != chromeDriverService && chromeDriverService.isRunning()) {
             chromeDriverService.stop();
+            System.out.println("ChromeDriverService Stopped");
+        }
     }
 
     @Override
     public String createDriver() {
-        final DesiredCapabilities capabilities = DesiredCapabilities.chrome();
-        // add capabilities
-        final ChromeOptions options = new ChromeOptions();
-        // add options
-        options.addArguments("test-type", "--start-maximized");
-        capabilities.setCapability(ChromeOptions.CAPABILITY, options);
-        System.out.println("Driver Started");
-        driver = new ChromeDriver(capabilities);
-        return capabilities.getBrowserName();
+        final ChromeOptions options = new ChromeOptions()
+                .addArguments("test-type", "--start-maximized");
+        // add additional required options here
+        this.driver = new RemoteWebDriver(getGridUrl(), options);
+        System.out.println("ChromeDriver Started");
+        return DesiredCapabilities.chrome().getBrowserName();
     }
 }

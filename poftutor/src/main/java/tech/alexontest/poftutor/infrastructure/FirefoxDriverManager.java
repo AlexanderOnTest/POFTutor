@@ -1,13 +1,13 @@
 package tech.alexontest.poftutor.infrastructure;
 
-import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxDriverLogLevel;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.GeckoDriverService;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.logging.Level;
 
 public class FirefoxDriverManager extends AbstractDriverManager implements WebDriverManager {
     private GeckoDriverService geckoDriverService;
@@ -31,26 +31,27 @@ public class FirefoxDriverManager extends AbstractDriverManager implements WebDr
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            System.out.println("GeckoDriverService Started");
         }
     }
 
     @Override
     public void stopService() {
-        quitDriver();
-        if (null != geckoDriverService && geckoDriverService.isRunning())
+        if (null != geckoDriverService && geckoDriverService.isRunning()) {
             geckoDriverService.stop();
+            System.out.println("GeckoDriverService Stopped");
+        }
+
     }
 
     @Override
     public String createDriver() {
-        final DesiredCapabilities capabilities = DesiredCapabilities.firefox();
-        // add capabilities
-        final FirefoxOptions options = new FirefoxOptions().setLogLevel(Level.OFF);
-        // add options
-        options.addCapabilities(capabilities);
-        driver = new FirefoxDriver(capabilities);
-        System.out.println("Driver Started");
-        return capabilities.getBrowserName();
+        final FirefoxOptions options = new FirefoxOptions()
+                .setLogLevel(FirefoxDriverLogLevel.ERROR); //to stop the debug spam
+        // add additional options here as required
+        this.driver = new RemoteWebDriver(getGridUrl(), options);
+        System.out.println("FirefoxDriver Started");
+        return DesiredCapabilities.firefox().getBrowserName();
     }
 
 }

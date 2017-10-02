@@ -1,41 +1,41 @@
 package tech.alexontest.poftutor.infrastructure;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
 
 /**
- * Abstract Test class that creates a new WebDriver for Each Test.
- * Supports JUnit 4 and JUnit 5 tests.
+ * My default AbstractTest class that creates a new WebDriver of the same type for Each Test.
+ * Supports only JUnit 5 tests.
  */
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 abstract public class AbstractTest {
     private WebDriver driver;
     private WebDriverManager driverManager;
 
-    @Before
-    @BeforeEach
-    public void setup() {
-        System.out.println("Preparing AbstractDriverManager");
+    @BeforeAll
+    void startService() {
+        System.out.println("Preparing DriverManager");
         driverManager = DriverManagerFactory.getManager(DriverType.CHROME);
+    }
+
+    @BeforeEach
+    void setup() {
         System.out.println("Getting Driver");
         driver = driverManager.getDriver();
     }
 
-    @After
     @AfterEach
-    public void teardown() {
-        System.out.println("Quiting Driver");
+    void teardown() {
+        System.out.println("Quitting Driver");
+        driverManager.quitDriver();
+    }
+
+    @AfterAll
+    void stopService() {
         driverManager.stopService();
     }
 
-    protected WebDriver getDriver() {
-        return driver;
-    }
-
     protected WebDriver getDriver(final String url) {
-        WebDriver driver = getDriver();
         driver.get(url);
         return driver;
     }
