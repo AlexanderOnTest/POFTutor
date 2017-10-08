@@ -11,10 +11,10 @@ import java.io.IOException;
 
 public class FirefoxDriverManager extends AbstractDriverManager implements WebDriverManager {
     private GeckoDriverService geckoDriverService;
-    private File geckoDriverExe;
+    private final File geckoDriverExe;
 
     FirefoxDriverManager() {
-        String path = getClass().getClassLoader().getResource("geckodriver.exe").getPath();
+        final String path = getClass().getClassLoader().getResource("geckodriver.exe").getPath();
         geckoDriverExe = new File(path);
         System.setProperty("webdriver.gecko.driver", path);
     }
@@ -28,7 +28,7 @@ public class FirefoxDriverManager extends AbstractDriverManager implements WebDr
                         .usingAnyFreePort()
                         .build();
                 geckoDriverService.start();
-            } catch (IOException e) {
+            } catch (final IOException e) {
                 e.printStackTrace();
             }
             System.out.println("GeckoDriverService Started");
@@ -41,7 +41,6 @@ public class FirefoxDriverManager extends AbstractDriverManager implements WebDr
             geckoDriverService.stop();
             System.out.println("GeckoDriverService Stopped");
         }
-
     }
 
     @Override
@@ -53,5 +52,4 @@ public class FirefoxDriverManager extends AbstractDriverManager implements WebDr
         System.out.println("FirefoxDriver Started");
         return DesiredCapabilities.firefox().getBrowserName();
     }
-
 }

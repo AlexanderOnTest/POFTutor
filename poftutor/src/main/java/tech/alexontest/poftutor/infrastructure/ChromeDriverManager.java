@@ -1,5 +1,6 @@
 package tech.alexontest.poftutor.infrastructure;
 
+        import org.openqa.selenium.chrome.ChromeDriver;
         import org.openqa.selenium.chrome.ChromeDriverService;
         import org.openqa.selenium.chrome.ChromeOptions;
         import org.openqa.selenium.remote.DesiredCapabilities;
@@ -12,11 +13,15 @@ public class ChromeDriverManager extends AbstractDriverManager implements WebDri
 
     private ChromeDriverService chromeDriverService;
     private final File chromedriverExe;
+    private final boolean isLocal;
+    private final boolean isHeadless;
 
-    ChromeDriverManager() {
+    ChromeDriverManager(final boolean isLocal, final boolean isHeadless) {
         final String path = getClass().getClassLoader().getResource("chromedriver.exe").getPath();
         chromedriverExe = new File(path);
         System.setProperty("webdriver.chrome.driver", path);
+        this.isLocal = isLocal;
+        this.isHeadless = isHeadless;
     }
 
     @Override
@@ -28,7 +33,7 @@ public class ChromeDriverManager extends AbstractDriverManager implements WebDri
                         .usingAnyFreePort()
                         .build();
                 chromeDriverService.start();
-            } catch (IOException e) {
+            } catch (final IOException e) {
                 e.printStackTrace();
             }
             System.out.println("ChromeDriverService Started");
@@ -46,9 +51,17 @@ public class ChromeDriverManager extends AbstractDriverManager implements WebDri
     @Override
     public String createDriver() {
         final ChromeOptions options = new ChromeOptions()
-                .addArguments("test-type", "--start-maximized");
+                .addArguments("--test-type", "--start-maximized");
         // add additional required options here
-        this.driver = new RemoteWebDriver(getGridUrl(), options);
+        if (!isLocal) {
+            driver = new RemoteWebDriver(getGridUrl(), options);
+        } else {
+            if (isHeadless) {
+                options.addArguments("--headless", "--disable-gpu");
+            }
+            driver = new ChromeDriver(chromeDriverService, options);
+            driver.navigate().to(getGridUrl());
+        }
         System.out.println("ChromeDriver Started");
         return DesiredCapabilities.chrome().getBrowserName();
     }

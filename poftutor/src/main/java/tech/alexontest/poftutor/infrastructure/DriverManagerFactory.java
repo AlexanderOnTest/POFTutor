@@ -1,16 +1,24 @@
 package tech.alexontest.poftutor.infrastructure;
 
-public class DriverManagerFactory {
+public final class DriverManagerFactory {
 
     private DriverManagerFactory() { }
 
     public static AbstractDriverManager getManager(final DriverType type) {
 
-        AbstractDriverManager driverManager;
+        final AbstractDriverManager driverManager;
 
         switch (type) {
             case CHROME:
-                driverManager = new ChromeDriverManager();
+                driverManager = new ChromeDriverManager(false, false);
+                break;
+
+            case CHROME_LOCAL:
+                driverManager = new ChromeDriverManager(true, false);
+                break;
+
+            case CHROME_LOCAL_HEADLESS:
+                driverManager = new ChromeDriverManager(true, true);
                 break;
 
             case EDGE:
@@ -26,7 +34,7 @@ public class DriverManagerFactory {
                 break;
 
             default:
-                driverManager = new ChromeDriverManager();
+                driverManager = new ChromeDriverManager(true, false);
                 break;
         }
         return driverManager;

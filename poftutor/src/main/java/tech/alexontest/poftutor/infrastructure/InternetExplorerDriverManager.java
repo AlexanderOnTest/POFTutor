@@ -28,7 +28,7 @@ public class InternetExplorerDriverManager extends AbstractDriverManager impleme
                         .usingAnyFreePort()
                         .build();
                 internetExplorerDriverService.start();
-            } catch (IOException e) {
+            } catch (final IOException e) {
                 e.printStackTrace();
             }
             System.out.println("InternetExplorerDriverService Started");

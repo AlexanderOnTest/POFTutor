@@ -3,7 +3,7 @@ package tech.alexontest.poftutor;
 import org.openqa.selenium.WebDriver;
 
 abstract class AbstractPage implements Page{
-    private WebDriver driver;
+    private final WebDriver driver;
 
     protected AbstractPage(final WebDriver driver) {
         this.driver = driver;

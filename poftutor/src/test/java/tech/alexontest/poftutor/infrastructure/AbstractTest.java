@@ -13,7 +13,7 @@ abstract public class AbstractTest {
     private WebDriverManager driverManager;
 
     @BeforeAll
-    void startService() {
+    void prepare() {
         System.out.println("Preparing DriverManager");
         driverManager = DriverManagerFactory.getManager(DriverType.CHROME);
     }
@@ -31,12 +31,16 @@ abstract public class AbstractTest {
     }
 
     @AfterAll
-    void stopService() {
+    void finalise() {
         driverManager.stopService();
     }
 
     protected WebDriver getDriver(final String url) {
         driver.get(url);
         return driver;
+    }
+
+    protected WebDriverManager getDriverManager() {
+        return driverManager;
     }
 }

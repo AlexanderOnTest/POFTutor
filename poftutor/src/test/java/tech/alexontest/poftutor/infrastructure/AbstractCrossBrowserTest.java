@@ -26,7 +26,7 @@ abstract public class AbstractCrossBrowserTest {
     }
 
     protected WebDriver getDriver(final String url) {
-        WebDriver driver = driverManager.getDriver();
+        final WebDriver driver = driverManager.getDriver();
         driver.get(url);
         return driver;
     }

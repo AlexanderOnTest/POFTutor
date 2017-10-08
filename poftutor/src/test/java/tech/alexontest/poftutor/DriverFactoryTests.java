@@ -8,36 +8,44 @@ import tech.alexontest.poftutor.infrastructure.DriverManagerFactory;
 import tech.alexontest.poftutor.infrastructure.DriverType;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
 @Tag("Framework")
 class DriverFactoryTests extends AbstractCrossBrowserTest{
-    private final String homePageURL = "https://www.bbc.co.uk/";
-    private final String OS = System.getProperty("os.name");
+    private final String homePageURL = "https://alexanderontesting.com/";
 
     @Test
-    @DisplayName("Chrome Browser Tests can be run on Windows")
-    void chromeDriverFactoryWorks() {
+    @DisplayName("Chrome Browser Tests can be run on the grid on Windows 10")
+    void chromeDriverFactoryWorksGrid() {
         checkThatPageLoads(DriverType.CHROME, "Chrome");
     }
 
     @Test
-    @DisplayName("Edge Browser Tests can be run on Windows 10")
+    @DisplayName("Chrome Browser Tests can be run locally on screen")
+    void chromeDriverFactoryWorksLocal() {
+        checkThatPageLoads(DriverType.CHROME_LOCAL, "Chrome");
+    }
+
+    @Test
+    @DisplayName("Chrome Browser Tests can be run locally headless")
+    void chromeDriverFactoryWorksHeadless() {
+        checkThatPageLoads(DriverType.CHROME_LOCAL_HEADLESS, "Chrome");
+    }
+
+    @Test
+    @DisplayName("Edge Browser Tests can be run on the grid on Windows 10")
     void edgeDriverFactoryWorks() {
-        assumeTrue(OS.equalsIgnoreCase("windows 10"), "Edge only runs on Windows 10.");
         checkThatPageLoads(DriverType.EDGE, "MicrosoftEdge");
     }
 
     @Test
-    @DisplayName("Firefox Browser Tests can be run on Windows")
+    @DisplayName("Firefox Browser Tests can be run on on the grid")
     void firefoxDriverFactoryWorks() {
         checkThatPageLoads(DriverType.FIREFOX, "Firefox");
     }
 
     @Test
-    @DisplayName("Internet Explorer Browser Tests can be run on Windows")
+    @DisplayName("Internet Explorer Browser Tests can be run on on the grid")
     void ieDriverFactoryWorks() {
-        assumeTrue(OS.contains("Windows"));
         checkThatPageLoads(DriverType.IE, "Internet Explorer");
     }
 
@@ -46,7 +54,7 @@ class DriverFactoryTests extends AbstractCrossBrowserTest{
         getDriverManager().startService();
         assertThat(getDriverManager().createDriver())
                 .as("Checking That browser is of type %s", browserName)
-        .isEqualToIgnoringCase(browserName);
+                .isEqualToIgnoringCase(browserName);
         assertThat(getDriver(homePageURL).getCurrentUrl())
                 .isEqualToIgnoringCase(homePageURL);
     }

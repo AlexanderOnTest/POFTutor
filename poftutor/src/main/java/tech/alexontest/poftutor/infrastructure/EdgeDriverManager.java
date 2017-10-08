@@ -10,7 +10,7 @@ import java.io.IOException;
 
 public class EdgeDriverManager extends AbstractDriverManager implements WebDriverManager {
     private EdgeDriverService edgeDriverService;
-    private File edgeDriverExe;
+    private final File edgeDriverExe;
 
     EdgeDriverManager() {
         final String path = getClass().getClassLoader().getResource("MicrosoftWebDriver.exe").getPath();
@@ -27,7 +27,7 @@ public class EdgeDriverManager extends AbstractDriverManager implements WebDrive
                         .usingAnyFreePort()
                         .build();
                 edgeDriverService.start();
-            } catch (IOException e) {
+            } catch (final IOException e) {
                 e.printStackTrace();
             }
             System.out.println("EdgeDriverService Started");

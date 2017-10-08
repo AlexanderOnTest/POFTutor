@@ -11,8 +11,8 @@ public abstract class AbstractDriverManager implements WebDriverManager {
 
     AbstractDriverManager() {
         try {
-            gridUrl = new URL("http://192.168.0.12:4444/wd/hub");
-        } catch (MalformedURLException e) {
+            gridUrl = new URL("http://192.168.0.17:4445/wd/hub");
+        } catch (final MalformedURLException e) {
             e.printStackTrace();
         }
     }
@@ -28,7 +28,6 @@ public abstract class AbstractDriverManager implements WebDriverManager {
             System.out.println("WebDriver quit");
             driver = null;
         }
-
     }
 
     @Override

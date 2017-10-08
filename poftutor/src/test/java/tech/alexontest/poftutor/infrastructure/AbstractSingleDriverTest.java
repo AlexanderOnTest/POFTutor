@@ -14,20 +14,21 @@ abstract public class AbstractSingleDriverTest {
     private WebDriverManager driverManager;
 
     @BeforeAll
-    void setup() {
+    void prepare() {
         System.out.println("Preparing DriverManager");
         driverManager = DriverManagerFactory.getManager(DriverType.CHROME);
         System.out.println("Getting Driver");
     }
 
     @AfterAll
-    void teardown() {
+    void finalise() {
+        System.out.println("Quitting Driver");
         driverManager.quitDriver();
         driverManager.stopService();
     }
 
     protected WebDriver getDriver(final String url) {
-        WebDriver driver = driverManager.getDriver();
+        final WebDriver driver = driverManager.getDriver();
         driver.get(url);
         return driver;
     }

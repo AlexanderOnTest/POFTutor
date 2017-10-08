@@ -19,7 +19,7 @@ class NavigationTests extends AbstractSingleDriverTest {
                 .isEqualToIgnoringCase(homePageURL);
     }
 
-    @Disabled("30/09/2017 Broken - re-enable after fixing")
+    @Disabled("Skipping - 30/09/2017 Broken - re-enable after fixing")
     @Test
     @DisplayName("http is directed to https")
     void httpRewriteIsWorking() {
@@ -27,7 +27,6 @@ class NavigationTests extends AbstractSingleDriverTest {
                 .isEqualToIgnoringCase(homePageURL);
     }
 
-    @Disabled("Until I have time to set up the forwarding")
     @Test
     @DisplayName("http://alexontest.tech is redirected here")
     void alexOnTestHttpRewriteIsWorking() {
@@ -35,7 +34,6 @@ class NavigationTests extends AbstractSingleDriverTest {
                 .isEqualToIgnoringCase(homePageURL);
     }
 
-    @Disabled("Until I have time to set up the forwarding")
     @Test
     @DisplayName("https://alexontest.tech is redirected here")
     void alexOnTestHttpsRewriteIsWorking() {
