@@ -60,7 +60,6 @@ public class ChromeDriverManager extends AbstractDriverManager implements WebDri
                 options.addArguments("--headless", "--disable-gpu");
             }
             driver = new ChromeDriver(chromeDriverService, options);
-            driver.navigate().to(getGridUrl());
         }
         System.out.println("ChromeDriver Started");
         return DesiredCapabilities.chrome().getBrowserName();

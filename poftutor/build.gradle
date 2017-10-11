@@ -38,8 +38,9 @@ dependencies {
     compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.6.0'
     compile group: 'org.assertj', name: 'assertj-core', version: '3.8.0'
 
-    testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.0.0'
+    testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-params', version: '5.0.1'
+    testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.0.1'
 
     testRuntime group: 'org.seleniumhq.selenium', name: 'selenium-server', version: '3.6.0'
-    testRuntime group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.0.0'
+    testRuntime group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.0.1'
 }

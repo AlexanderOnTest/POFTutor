@@ -11,7 +11,7 @@ public abstract class AbstractDriverManager implements WebDriverManager {
 
     AbstractDriverManager() {
         try {
-            gridUrl = new URL("http://192.168.0.17:4445/wd/hub");
+            gridUrl = new URL("http://SILENTHTPC:4444/wd/hub");
         } catch (final MalformedURLException e) {
             e.printStackTrace();
         }
