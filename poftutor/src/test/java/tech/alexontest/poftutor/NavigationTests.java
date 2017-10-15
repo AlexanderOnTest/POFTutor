@@ -1,9 +1,8 @@
 package tech.alexontest.poftutor;
 
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import tech.alexontest.poftutor.infrastructure.AbstractSingleDriverTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -12,32 +11,20 @@ import static org.assertj.core.api.Assertions.assertThat;
 class NavigationTests extends AbstractSingleDriverTest {
     private final String homePageURL = "https://alexanderontesting.com/";
 
-    @Test
-    @DisplayName("Homepage URL displays correctly")
-    void urlIsCorrect() {
-        assertThat(getDriver(homePageURL).getCurrentUrl())
-                .isEqualToIgnoringCase(homePageURL);
-    }
+    @ParameterizedTest(name = "{1}")
+    @CsvSource({
+            "https://alexanderontesting.com/, Homepage URL displays correctly",
+            "http://alexanderontesting.com/, http is directed to https",
+            "https://www.alexanderontesting.com/, https://www.alexanderontesting.com/ directs here",
+            "http://www.alexanderontesting.com/, http://www.alexanderontesting.com/ directs here",
+            "https://alexontest.tech/, https://alexontest.tech is redirected here",
+            "http://alexontest.tech/, http://alexontest.tech is redirected here",
+            "https://www.alexontest.tech/, https://www.alexontest.tech is redirected here",
+            "http://www.alexontest.tech/, http://www.alexontest.tech is redirected here"
+    })
 
-    @Disabled("Skipping - 30/09/2017 Broken - re-enable after fixing")
-    @Test
-    @DisplayName("http is directed to https")
-    void httpRewriteIsWorking() {
-        assertThat(getDriver("http://alexanderontesting.com/").getCurrentUrl())
-                .isEqualToIgnoringCase(homePageURL);
-    }
-
-    @Test
-    @DisplayName("http://alexontest.tech is redirected here")
-    void alexOnTestHttpRewriteIsWorking() {
-        assertThat(getDriver("http://alexontest.tech/").getCurrentUrl())
-                .isEqualToIgnoringCase(homePageURL);
-    }
-
-    @Test
-    @DisplayName("https://alexontest.tech is redirected here")
-    void alexOnTestHttpsRewriteIsWorking() {
-        assertThat(getDriver("https://alexontest.tech/").getCurrentUrl())
+    void allUrlsLeadToHere(final String urlToTest) {
+        assertThat(getDriver(urlToTest).getCurrentUrl())
                 .isEqualToIgnoringCase(homePageURL);
     }
 }

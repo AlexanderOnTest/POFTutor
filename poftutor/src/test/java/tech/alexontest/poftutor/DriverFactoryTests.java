@@ -22,14 +22,15 @@ class DriverFactoryTests extends AbstractCrossBrowserTest{
             "CHROME_LOCAL_HEADLESS, Chrome, Chrome Browser Tests can be run headless locally."
     }) // Simplest way to pass multiple parameters, places them right above the test.
     @MethodSource("arguments") // Can be used to pass more complex to construct objects.
-    void driverFactoryWorks(final DriverType driverType, final String browserName, final String testName) {
+    void driverFactoryWorks(final DriverType driverType, final String browserName) {
         setDriverManager(DriverManagerFactory.getManager(driverType));
         getDriverManager().startService();
         assertThat(getDriverManager().createDriver())
-                .as("Checking That browser is of type %s", browserName)
+                .as(String.format("Checking That browser is of type %s", browserName))
                 .isEqualToIgnoringCase(browserName);
-        final String homePageURL = "https://alexanderontesting.com/";
+        final String homePageURL = "https://www.bbc.com/";
         assertThat(getDriver(homePageURL).getCurrentUrl())
+                .as(String.format("Check that browser '%1$s' successfully loads the homepage '%2$s'", browserName, homePageURL))
                 .isEqualToIgnoringCase(homePageURL);
     }
 

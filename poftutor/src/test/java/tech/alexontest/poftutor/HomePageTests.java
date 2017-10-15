@@ -14,7 +14,7 @@ class HomePageTests extends AbstractTest {
 
     @BeforeEach
     void setupHomepage() {
-        homePage = new PfHomePage(getDriver("https://alexanderontesting.com/"));                             //Page Factory implementation
+        homePage = new PfHomePage(getDriver("https://alexanderontesting.com/"));
     }
 
     @Test

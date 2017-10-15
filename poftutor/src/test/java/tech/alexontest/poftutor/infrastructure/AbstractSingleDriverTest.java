@@ -32,4 +32,8 @@ abstract public class AbstractSingleDriverTest {
         driver.get(url);
         return driver;
     }
+
+    protected WebDriverManager getDriverManager() {
+        return driverManager;
+    }
 }
