@@ -27,6 +27,13 @@ junitPlatform {
 }
 
 apply plugin: 'java'
+apply plugin: 'checkstyle'
+
+checkstyle {
+    //configFile = rootProject.file('checkstyle.xml')
+    //configProperties = [checkstyleSuppressionFile: rootProject.file('suppressions.xml')]
+    toolVersion = '8.4'
+}
 
 sourceCompatibility = 1.8
 
