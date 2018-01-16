@@ -4,12 +4,14 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-import tech.alexontest.poftutor.infrastructure.AbstractTest;
+import tech.alexontest.poftutor.infrastructure.AbstractSingleDriverTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static tech.alexontest.poftutor.Constants.MAX_POSTS_PER_LISTING_PAGE;
+import static tech.alexontest.poftutor.Constants.WIDGETS_PER_PAGE;
 
 @Tag("Content")
-class HomePageTests extends AbstractTest {
+class HomePageTests extends AbstractSingleDriverTest {
     private HomePage homePage;
 
     @BeforeEach
@@ -29,7 +31,7 @@ class HomePageTests extends AbstractTest {
     void pageContainsFiveWidgets() {
         assertThat(homePage.getWidgets())
                 .size()
-                .isEqualTo(5);
+                .isEqualTo(WIDGETS_PER_PAGE);
     }
 
     @Test
@@ -37,6 +39,6 @@ class HomePageTests extends AbstractTest {
     void pageContainsUpToFiveArticles() {
         assertThat(homePage.getArticles())
                 .size()
-                .isLessThanOrEqualTo(5);
+                .isLessThanOrEqualTo(MAX_POSTS_PER_LISTING_PAGE);
     }
 }

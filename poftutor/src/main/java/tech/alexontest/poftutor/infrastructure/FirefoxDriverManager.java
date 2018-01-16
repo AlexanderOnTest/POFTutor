@@ -9,8 +9,10 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import java.io.File;
 import java.io.IOException;
 
-public class FirefoxDriverManager extends AbstractDriverManager implements WebDriverManager {
+public final class FirefoxDriverManager extends AbstractDriverManager implements WebDriverManager {
+
     private GeckoDriverService geckoDriverService;
+
     private final File geckoDriverExe;
 
     FirefoxDriverManager() {
@@ -46,10 +48,12 @@ public class FirefoxDriverManager extends AbstractDriverManager implements WebDr
     @Override
     public String createDriver() {
         final FirefoxOptions options = new FirefoxOptions()
-                .setLogLevel(FirefoxDriverLogLevel.ERROR); //to stop the debug spam
+                .setLogLevel(FirefoxDriverLogLevel.ERROR);
+        //to stop the debug spam
         // add additional options here as required
-        this.driver = new RemoteWebDriver(getGridUrl(), options);
+        setDriver(new RemoteWebDriver(getGridUrl(), options));
         System.out.println("FirefoxDriver Started");
         return DesiredCapabilities.firefox().getBrowserName();
     }
 }
+

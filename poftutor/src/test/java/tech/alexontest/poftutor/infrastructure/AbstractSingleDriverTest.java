@@ -10,7 +10,7 @@ import org.openqa.selenium.WebDriver;
  * Only supports JUnit 5 tests.
  */
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-abstract public class AbstractSingleDriverTest {
+public abstract class AbstractSingleDriverTest {
     private WebDriverManager driverManager;
 
     @BeforeAll

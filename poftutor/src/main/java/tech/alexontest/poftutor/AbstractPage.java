@@ -2,7 +2,7 @@ package tech.alexontest.poftutor;
 
 import org.openqa.selenium.WebDriver;
 
-abstract class AbstractPage implements Page{
+abstract class AbstractPage implements Page {
     private final WebDriver driver;
 
     protected AbstractPage(final WebDriver driver) {

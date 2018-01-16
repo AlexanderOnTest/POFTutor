@@ -8,9 +8,10 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import java.io.File;
 import java.io.IOException;
 
-public class InternetExplorerDriverManager extends AbstractDriverManager implements WebDriverManager {
+public final class InternetExplorerDriverManager extends AbstractDriverManager implements WebDriverManager {
 
     private InternetExplorerDriverService internetExplorerDriverService;
+
     private final File internetExplorerDriverExe;
 
     InternetExplorerDriverManager() {
@@ -47,7 +48,7 @@ public class InternetExplorerDriverManager extends AbstractDriverManager impleme
     public String createDriver() {
         final InternetExplorerOptions options = new InternetExplorerOptions();
         //add required options here
-        driver = new RemoteWebDriver(getGridUrl(), options);
+        setDriver(new RemoteWebDriver(getGridUrl(), options));
         System.out.println("InternetExplorerDriver Started");
         return DesiredCapabilities.internetExplorer().getBrowserName();
     }

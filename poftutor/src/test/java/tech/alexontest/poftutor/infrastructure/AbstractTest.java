@@ -1,6 +1,10 @@
 package tech.alexontest.poftutor.infrastructure;
 
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.TestInstance;
 import org.openqa.selenium.WebDriver;
 
 /**
@@ -8,8 +12,10 @@ import org.openqa.selenium.WebDriver;
  * Supports only JUnit 5 tests.
  */
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-abstract public class AbstractTest {
+public abstract class AbstractTest {
+
     private WebDriver driver;
+
     private WebDriverManager driverManager;
 
     @BeforeAll

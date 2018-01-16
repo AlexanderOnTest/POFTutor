@@ -7,7 +7,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
 
-public class PfHomePage extends AbstractPage implements HomePage {
+public final class PfHomePage extends AbstractPage implements HomePage {
     @FindBy(css = ".site-title")
     private WebElement pageTitle;
 

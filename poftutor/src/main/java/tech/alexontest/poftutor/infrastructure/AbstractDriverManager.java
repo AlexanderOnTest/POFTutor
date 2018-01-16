@@ -6,7 +6,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 public abstract class AbstractDriverManager implements WebDriverManager {
-    protected WebDriver driver;
+    private WebDriver driver;
+
     private URL gridUrl;
 
     AbstractDriverManager() {
@@ -17,10 +18,17 @@ public abstract class AbstractDriverManager implements WebDriverManager {
         }
     }
 
+    /**
+     * This implementation returns the default grid URL initialised in the constructor.
+     * @return URL of the grid
+     */
     URL getGridUrl() {
         return gridUrl;
     }
 
+    /**
+     * Close the WebDriver and Browser.
+     */
     @Override
     public void quitDriver() {
         if (null != driver) {
@@ -30,6 +38,10 @@ public abstract class AbstractDriverManager implements WebDriverManager {
         }
     }
 
+    /**
+     * Return a running WebDriver instance controlling and instance of the requested browser.
+     * @return the WebDriver to control the browser.
+     */
     @Override
     public WebDriver getDriver() {
         if (null == driver) {
@@ -37,5 +49,9 @@ public abstract class AbstractDriverManager implements WebDriverManager {
             createDriver();
         }
         return driver;
+    }
+
+    final void setDriver(final WebDriver driver) {
+        this.driver = driver;
     }
 }

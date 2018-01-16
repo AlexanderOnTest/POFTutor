@@ -8,8 +8,10 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import java.io.File;
 import java.io.IOException;
 
-public class EdgeDriverManager extends AbstractDriverManager implements WebDriverManager {
+public final class EdgeDriverManager extends AbstractDriverManager implements WebDriverManager {
+
     private EdgeDriverService edgeDriverService;
+
     private final File edgeDriverExe;
 
     EdgeDriverManager() {
@@ -45,7 +47,7 @@ public class EdgeDriverManager extends AbstractDriverManager implements WebDrive
     @Override
     public String createDriver() {
         final EdgeOptions options = new EdgeOptions();
-        this.driver = new RemoteWebDriver(getGridUrl(), options);
+        setDriver(new RemoteWebDriver(getGridUrl(), options));
 
         System.out.println("EdgeDriver Started");
         return DesiredCapabilities.edge().getBrowserName();

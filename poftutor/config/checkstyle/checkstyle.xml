@@ -5,41 +5,142 @@
     This configuration file was written by the eclipse-cs plugin configuration editor
 -->
 <!--
-    Checkstyle-Configuration: AlexOnTest
-    Description: 
-Checkstyle configuration used by alexontest.tech / alexanderontesting.com
+    Checkstyle-Configuration: AlexOnTest.tech
+    Description:
+My own rules
 -->
 <module name="Checker">
+  <!-- default severity -->
+  <property name="severity" value="error"/>
+  <property name="fileExtensions" value="java, properties, xml"/>
+  <!-- define the suppression file -->
   <module name="SuppressionFilter">
     <property name="file" value="${config_loc}/suppressions.xml"/>
   </module>
-  <property name="cacheFile" value="${config_loc}/checkstyleCache"/>
-  <property name="severity" value="warning"/>
-  <property name="fileExtensions" value="java, properties, xml"/>
+  <!-- permit suppression annotations -->
+  <module name="SuppressWarningsFilter"/>
+  <module name="Translation"/>
+  <!-- All length checks as warnings -->
+  <module name="FileLength">
+    <property name="severity" value="warning"/>
+  </module>
+  <!-- no tabs -->
+  <module name="FileTabCharacter">
+    <property name="severity" value="error"/>
+    <property name="eachLine" value="true"/>
+  </module>
+  <!-- no trailing spaces - except whitespace only lines -->
+  <module name="RegexpSingleline">
+    <property name="severity" value="warning"/>
+    <property name="format" value="[^ \n\t]\s+$"/>
+    <property name="message" value="Line has trailing spaces."/>
+  </module>
+  <module name="UniqueProperties"/>
+  <!-- All Javadoc checks currently ignored in suppression file 13/01/18 -->
+  <module name="JavadocPackage">
+    <property name="severity" value="error"/>
+  </module>
   <module name="TreeWalker">
+    <!-- enables @SuppressWarnings annotation -->
     <module name="SuppressWarningsHolder"/>
-    <module name="JavadocMethod"/>
-    <module name="JavadocType"/>
-    <module name="JavadocVariable"/>
-    <module name="JavadocStyle"/>
-    <module name="ConstantName"/>
-    <module name="LocalFinalVariableName"/>
-    <module name="LocalVariableName"/>
-    <module name="MemberName"/>
-    <module name="MethodName"/>
-    <module name="PackageName"/>
-    <module name="ParameterName"/>
-    <module name="StaticVariableName"/>
-    <module name="TypeName"/>
-    <module name="AvoidStarImport"/>
-    <module name="IllegalImport"/>
-    <module name="RedundantImport"/>
+    <!-- define SuppressionCommentFilter to turn off all checks -->
+    <module name="SuppressionCommentFilter">
+        <property name="offCommentFormat" value="CHECKSTYLE_OFF"/>
+        <property name="onCommentFormat" value="CHECKSTYLE_ON"/>
+    </module>
+    <!-- define SuppressionCommentFilter to turn off defined check (preferred) -->
+    <module name="SuppressionCommentFilter">
+        <property name="offCommentFormat" value="CSOFF\: ([\w\|]+)"/>
+        <property name="onCommentFormat" value="CSON\: ([\w\|]+)"/>
+        <property name="checkFormat" value="$1"/>
+    </module>
+    <!-- All Javadoc checks currently ignored in suppression file 13/01/18 -->
+    <module name="JavadocMethod">
+      <property name="severity" value="error"/>
+    </module>
+    <!-- All Javadoc checks currently ignored in suppression file 13/01/18 -->
+    <module name="JavadocType">
+      <property name="severity" value="error"/>
+    </module>
+    <!-- All Javadoc checks currently ignored in suppression file 13/01/18 -->
+    <module name="JavadocVariable">
+      <property name="severity" value="error"/>
+    </module>
+    <!-- All Javadoc checks currently ignored in suppression file 13/01/18 -->
+    <module name="JavadocStyle">
+      <property name="severity" value="error"/>
+    </module>
+    <!-- Naming problems as errors -->
+    <module name="ConstantName">
+      <property name="severity" value="error"/>
+    </module>
+    <module name="LocalFinalVariableName">
+      <property name="severity" value="error"/>
+    </module>
+    <module name="LocalVariableName">
+      <property name="severity" value="error"/>
+    </module>
+    <module name="MemberName">
+      <property name="severity" value="error"/>
+    </module>
+    <module name="MethodName">
+      <property name="severity" value="error"/>
+    </module>
+    <module name="PackageName">
+      <property name="severity" value="error"/>
+    </module>
+    <module name="ParameterName">
+      <property name="severity" value="error"/>
+      <property name="accessModifiers" value="public"/>
+    </module>
+    <module name="StaticVariableName">
+      <property name="severity" value="error"/>
+    </module>
+    <module name="TypeName">
+      <property name="severity" value="error"/>
+    </module>
+    <module name="AbstractClassName">
+      <property name="severity" value="error"/>
+    </module>
+    <module name="ClassTypeParameterName">
+      <property name="severity" value="error"/>
+    </module>
+    <!-- import checks as errors -->
+    <module name="AvoidStarImport">
+      <property name="severity" value="error"/>
+    </module>
+    <module name="IllegalImport">
+      <property name="severity" value="error"/>
+    </module>
+    <module name="RedundantImport">
+      <property name="severity" value="error"/>
+    </module>
     <module name="UnusedImports">
+      <property name="severity" value="error"/>
+      <!-- do not permit import solely for Javadoc -->
       <property name="processJavadoc" value="false"/>
     </module>
-    <module name="LineLength"/>
-    <module name="MethodLength"/>
-    <module name="ParameterNumber"/>
+    <module name="ImportOrder">
+      <!-- Match intellij IDEA defaults -->
+      <property name="severity" value="error"/>
+      <property name="groups" value="*,javax,java"/>
+      <property name="ordered" value="true"/>
+      <property name="separated" value="true"/>
+      <property name="option" value="bottom"/>
+      <property name="sortStaticImportsAlphabetically" value="true"/>
+    </module>
+    <!-- All length checks as warnings -->
+    <module name="LineLength">
+      <property name="severity" value="warning"/>
+      <property name="max" value="120"/>
+      <property name="tabWidth" value="4"/>
+    </module>
+    <module name="MethodLength">
+      <property name="severity" value="warning"/>
+    </module>
+    <module name="ParameterNumber">
+      <property name="severity" value="warning"/>
+    </module>
     <module name="EmptyForIteratorPad"/>
     <module name="GenericWhitespace"/>
     <module name="MethodParamPad"/>
@@ -60,14 +161,17 @@ Checkstyle configuration used by alexontest.tech / alexanderontesting.com
     <module name="AvoidInlineConditionals"/>
     <module name="EmptyStatement"/>
     <module name="EqualsHashCode"/>
-    <module name="HiddenField"/>
+    <module name="HiddenField">
+      <!-- allow constructor or setter parameter with same name as field -->
+      <property name="ignoreConstructorParameter" value="true"/>
+      <property name="ignoreSetter" value="true"/>
+    </module>
     <module name="IllegalInstantiation"/>
     <module name="InnerAssignment"/>
     <module name="MagicNumber"/>
     <module name="MissingSwitchDefault"/>
     <module name="SimplifyBooleanExpression"/>
     <module name="SimplifyBooleanReturn"/>
-    <module name="DesignForExtension"/>
     <module name="FinalClass"/>
     <module name="HideUtilityClassConstructor"/>
     <module name="InterfaceIsType"/>
@@ -76,9 +180,8 @@ Checkstyle configuration used by alexontest.tech / alexanderontesting.com
     <module name="FinalParameters"/>
     <module name="TodoComment"/>
     <module name="UpperEll"/>
-    <module name="AbstractClassName"/>
-    <module name="ImportOrder"/>
     <module name="MethodCount">
+      <property name="severity" value="warning"/>
       <property name="tokens" value="CLASS_DEF,ENUM_CONSTANT_DEF,ENUM_DEF,INTERFACE_DEF,ANNOTATION_DEF"/>
     </module>
     <module name="EmptyForInitializerPad">
@@ -139,22 +242,8 @@ Checkstyle configuration used by alexontest.tech / alexanderontesting.com
     <module name="CommentsIndentation"/>
     <module name="TrailingComment"/>
     <module name="OuterTypeFilename"/>
-    <module name="SuppressWarnings"/>
-    <module name="AnnotationLocation"/>
+    <module name="AnnotationLocation">
+      <property name="severity" value="error"/>
+    </module>
   </module>
-  <module name="JavadocPackage"/>
-  <module name="NewlineAtEndOfFile"/>
-  <module name="Translation"/>
-  <module name="FileLength"/>
-  <module name="FileTabCharacter"/>
-  <module name="RegexpSingleline">
-    <property name="format" value="\s+$"/>
-    <property name="message" value="Line has trailing spaces."/>
-  </module>
-  <module name="UniqueProperties"/>
-  <module name="SuppressionFilter">
-    <property name="file" value="suppressions.xml"/>
-  </module>
-  <module name="SuppressWarningsFilter"/>
-  <module name="BeforeExecutionExclusionFileFilter"/>
 </module>

@@ -1,3 +1,6 @@
-#Thu Nov 16 07:46:19 GMT 2017
-module-resource*?\:C\:\\Blog\\POFTutor\\poftutor\\config\\checkstyle/suppressions.xml=26EDE5F60417400E42CD85B4956F0BD235A52DEC
-configuration*?=D3C80D84D34208A26A56BC3937062303366CE771
+#Tue Jan 02 22:43:07 GMT 2018
+module-resource*?\:C\:\\Dev\\Blog\\POFTutor\\poftutor\\config\\checkstyle/suppressions.xml=46C5184AB708A1608671F06243A2D18884DE74D8
+C\:\\Dev\\Blog\\POFTutor\\poftutor\\src\\main\\java\\tech\\alexontest\\poftutor\\Page.java=1508705471574
+C\:\\Dev\\Blog\\POFTutor\\poftutor\\src\\main\\java\\tech\\alexontest\\poftutor\\infrastructure\\DriverType.java=1509058314386
+C\:\\Dev\\Blog\\POFTutor\\poftutor\\src\\main\\java\\tech\\alexontest\\poftutor\\infrastructure\\WebDriverManager.java=1508705471688
+configuration*?=BEA4631CF6AA1A84C39E8A740F820921DC928FF0

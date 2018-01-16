@@ -20,34 +20,36 @@ junitPlatform {
         tags {
             // Framework tests need to be run only when required to verify the this framework is still working.
             exclude "Framework"
-            //include "Navigation", "Content"
         }
         includeClassNamePatterns '.*Test', '.*Tests'
     }
 }
 
 apply plugin: 'java'
-apply plugin: 'checkstyle'
-
-checkstyle {
-    //configFile = rootProject.file('checkstyle.xml')
-    //configProperties = [checkstyleSuppressionFile: rootProject.file('suppressions.xml')]
-    toolVersion = '8.4'
-}
-
 sourceCompatibility = 1.8
+
+apply plugin: 'checkstyle'
+checkstyle {
+    final config_loc = 'config/checkstyle'
+    // Adding the line below will cause builds to fail on warning as well as error severity violations
+    // maxWarnings = 0
+    // Removing the line below will not fail the build on violations, only report results.
+    ignoreFailures = false
+    configFile = rootProject.file("${config_loc}/checkstyle.xml")
+    toolVersion = '8.5'
+}
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.6.0'
+    compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.8.1'
     compile group: 'org.assertj', name: 'assertj-core', version: '3.8.0'
 
     testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-params', version: '5.0.1'
     testCompile group: 'org.apiguardian', name: 'apiguardian-api', version: '1.0.0'
-    testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.0.1'
+    compile group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.0.1'
 
     testRuntime group: 'org.seleniumhq.selenium', name: 'selenium-server', version: '3.6.0'
     testRuntime group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.0.1'

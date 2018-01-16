@@ -1,19 +1,22 @@
 package tech.alexontest.poftutor.infrastructure;
 
-        import org.openqa.selenium.chrome.ChromeDriver;
-        import org.openqa.selenium.chrome.ChromeDriverService;
-        import org.openqa.selenium.chrome.ChromeOptions;
-        import org.openqa.selenium.remote.DesiredCapabilities;
-        import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeDriverService;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
-        import java.io.File;
-        import java.io.IOException;
+import java.io.File;
+import java.io.IOException;
 
-public class ChromeDriverManager extends AbstractDriverManager implements WebDriverManager {
+public final class ChromeDriverManager extends AbstractDriverManager implements WebDriverManager {
 
     private ChromeDriverService chromeDriverService;
+
     private final File chromedriverExe;
+
     private final boolean isLocal;
+
     private final boolean isHeadless;
 
     ChromeDriverManager(final boolean isLocal, final boolean isHeadless) {
@@ -54,12 +57,12 @@ public class ChromeDriverManager extends AbstractDriverManager implements WebDri
                 .addArguments("--test-type", "--start-maximized");
         // add additional required options here
         if (!isLocal) {
-            driver = new RemoteWebDriver(getGridUrl(), options);
+            setDriver(new RemoteWebDriver(getGridUrl(), options));
         } else {
             if (isHeadless) {
                 options.addArguments("--headless", "--disable-gpu");
             }
-            driver = new ChromeDriver(chromeDriverService, options);
+            setDriver(new ChromeDriver(chromeDriverService, options));
         }
         System.out.println("ChromeDriver Started");
         return DesiredCapabilities.chrome().getBrowserName();
