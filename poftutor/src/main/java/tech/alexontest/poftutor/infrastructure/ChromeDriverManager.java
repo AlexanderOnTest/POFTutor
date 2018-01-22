@@ -3,7 +3,6 @@ package tech.alexontest.poftutor.infrastructure;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.io.File;
@@ -65,6 +64,6 @@ public final class ChromeDriverManager extends AbstractDriverManager implements 
             setDriver(new ChromeDriver(chromeDriverService, options));
         }
         System.out.println("ChromeDriver Started");
-        return DesiredCapabilities.chrome().getBrowserName();
+        return options.getBrowserName();
     }
 }

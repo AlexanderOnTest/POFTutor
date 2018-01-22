@@ -33,6 +33,14 @@ public final class DriverManagerFactory {
                 driverManager = new InternetExplorerDriverManager();
                 break;
 
+            case OPERA:
+                driverManager = new OperaDriverManager(false);
+                break;
+
+            case OPERA_LOCAL:
+                driverManager = new OperaDriverManager(true);
+                break;
+
             default:
                 driverManager = new ChromeDriverManager(true, false);
                 break;

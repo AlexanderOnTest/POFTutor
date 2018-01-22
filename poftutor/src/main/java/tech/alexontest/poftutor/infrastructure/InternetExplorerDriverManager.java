@@ -2,7 +2,6 @@ package tech.alexontest.poftutor.infrastructure;
 
 import org.openqa.selenium.ie.InternetExplorerDriverService;
 import org.openqa.selenium.ie.InternetExplorerOptions;
-import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.io.File;
@@ -50,6 +49,6 @@ public final class InternetExplorerDriverManager extends AbstractDriverManager i
         //add required options here
         setDriver(new RemoteWebDriver(getGridUrl(), options));
         System.out.println("InternetExplorerDriver Started");
-        return DesiredCapabilities.internetExplorer().getBrowserName();
+        return options.getBrowserName();
     }
 }

@@ -3,7 +3,6 @@ package tech.alexontest.poftutor.infrastructure;
 import org.openqa.selenium.firefox.FirefoxDriverLogLevel;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.GeckoDriverService;
-import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.io.File;
@@ -53,7 +52,7 @@ public final class FirefoxDriverManager extends AbstractDriverManager implements
         // add additional options here as required
         setDriver(new RemoteWebDriver(getGridUrl(), options));
         System.out.println("FirefoxDriver Started");
-        return DesiredCapabilities.firefox().getBrowserName();
+        return options.getBrowserName();
     }
 }
 
