@@ -1,8 +1,10 @@
 package tech.alexontest.poftutor.infrastructure;
 
+import java.util.regex.Pattern;
+
 public enum DriverType {
-    CHROME("Chrome"),
-    CHROME_LOCAL("Chrome"),
+    CHROME("^(?!.*?\\bOPR/\\b)^(?!.*?\\bEdge/\\b).*?\\bChrome/\\b.*?\\bSafari/\\b.*$"),
+    CHROME_LOCAL("^(?!.*?\\bOPR/\\b)^(?!.*?\\bEdge/\\b).*?\\bChrome/\\b.*?\\bSafari/\\b.*$"),
     CHROME_LOCAL_HEADLESS("HeadlessChrome"),
     EDGE("Edge"),
     FIREFOX("Firefox"),
@@ -10,13 +12,13 @@ public enum DriverType {
     OPERA("OPR/"),
     OPERA_LOCAL("OPR/"),;
 
-    private final String checkString;
+    private final Pattern regex;
 
-    DriverType(final String checkString) {
-        this.checkString = checkString;
+    DriverType(final String regexString) {
+        this.regex = Pattern.compile(regexString);
     }
 
-    public String getCheckString() {
-        return checkString;
+    public Pattern getRegex() {
+        return regex;
     }
 }

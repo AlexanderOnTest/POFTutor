@@ -12,6 +12,7 @@ import tech.alexontest.poftutor.infrastructure.AbstractCrossBrowserTest;
 import tech.alexontest.poftutor.infrastructure.DriverManagerFactory;
 import tech.alexontest.poftutor.infrastructure.DriverType;
 
+import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -37,10 +38,11 @@ class DriverFactoryTests extends AbstractCrossBrowserTest {
         final String homePageURL = "https://www.example.com/";
         final WebDriver driver = getDriver(homePageURL);
         final String agentString = (String) ((JavascriptExecutor) driver).executeScript("return navigator.userAgent;");
-        final String checkString = driverType.getCheckString();
+        final Pattern regex = driverType.getRegex();
         assertThat(agentString)
-                .as("Incorrect Browser Launched: Browser Agent String does not contain the check String.")
-                .contains(checkString);
+                .as("AgentString does not match pattern for %s", driverType.name())
+                .containsPattern(driverType.getRegex());
+
         assertThat(driver.getCurrentUrl())
                 .as(String.format(
                         "Check that browser '%1$s' successfully loads the homepage '%2$s'", browserName, homePageURL
