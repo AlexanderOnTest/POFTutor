@@ -51,6 +51,5 @@ dependencies {
     testCompile group: 'org.apiguardian', name: 'apiguardian-api', version: '1.0.0'
     compile group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.0.1'
 
-    testRuntime group: 'org.seleniumhq.selenium', name: 'selenium-server', version: '3.6.0'
     testRuntime group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.0.1'
 }

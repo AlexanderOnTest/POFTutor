@@ -50,8 +50,7 @@ public final class OperaDriverManager extends AbstractDriverManager implements W
     @Override
     public String createDriver() {
         final OperaOptions options = new OperaOptions()
-                .setBinary(new File("C:/Program Files/Opera/50.0.2762.58/opera.exe"));
-        //options.setCapability("browserName", "operablink");
+                .setBinary(new File("C:/Program Files/Opera/50.0.2762.67/opera.exe"));
         // add additional options here as required
         if (!isLocal) {
             setDriver(new RemoteWebDriver(getGridUrl(), options));
