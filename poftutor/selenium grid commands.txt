@@ -1,9 +1,0 @@
-java -jar selenium-server-standalone-3.6.0.jar -role hub
-
-java -Dwebdriver.chrome.driver=chromedriver.exe -jar selenium-server-standalone-3.6.0.jar -port 5555 -role node -hub http://localhost:4444/grid/register -browser "browserName=chrome, platform=WINDOWS, maxInstances=10"
-
-java -Dwebdriver.edge.driver=MicrosoftWebDriver.exe -jar selenium-server-standalone-3.6.0.jar -port 5556 -role node -hub http://localhost:4444/grid/register -browser "browserName=MicrosoftEdge, platform=WINDOWS, maxInstances=10"
-
-java -Dwebdriver.ie.driver=IEDriverServer.exe -jar selenium-server-standalone-3.6.0.jar -port 5557 -role node -hub http://localhost:4444/grid/register -browser "browserName=internet explorer, platform=WINDOWS, maxInstances=10"
-
-java -Dwebdriver.gecko.driver=geckodriver.exe -jar selenium-server-standalone-3.6.0.jar -port 5558 -role node -hub http://localhost:4444/grid/register -browser "browserName=firefox, platform=WINDOWS, maxInstances=10"
