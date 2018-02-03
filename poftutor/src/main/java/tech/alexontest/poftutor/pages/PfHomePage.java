@@ -1,9 +1,10 @@
-package tech.alexontest.poftutor;
+package tech.alexontest.poftutor.pages;
 
-import org.openqa.selenium.WebDriver;
+import com.google.inject.Inject;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import tech.alexontest.poftutor.infrastructure.driver.WebDriverManager;
 
 import java.util.List;
 
@@ -17,9 +18,10 @@ public final class PfHomePage extends AbstractPage implements HomePage {
     @FindBy(css = ".post-content")
     private List<WebElement> articles;
 
-    public PfHomePage(final WebDriver driver) {
-        super(driver);
-        PageFactory.initElements(driver, this);
+    @Inject
+    public PfHomePage(final WebDriverManager webDriverManager) {
+        super(webDriverManager.getDriver());
+        PageFactory.initElements(webDriverManager.getDriver(), this);
     }
 
     @Override

@@ -9,10 +9,9 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import tech.alexontest.poftutor.infrastructure.AbstractCrossBrowserTest;
-import tech.alexontest.poftutor.infrastructure.DriverManagerFactory;
-import tech.alexontest.poftutor.infrastructure.DriverType;
+import tech.alexontest.poftutor.infrastructure.driver.DriverManagerFactory;
+import tech.alexontest.poftutor.infrastructure.driver.DriverType;
 
-import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -38,7 +37,6 @@ class DriverFactoryTests extends AbstractCrossBrowserTest {
         final String homePageURL = "https://www.example.com/";
         final WebDriver driver = getDriver(homePageURL);
         final String agentString = (String) ((JavascriptExecutor) driver).executeScript("return navigator.userAgent;");
-        final Pattern regex = driverType.getRegex();
         assertThat(agentString)
                 .as("AgentString does not match pattern for %s", driverType.name())
                 .containsPattern(driverType.getRegex());

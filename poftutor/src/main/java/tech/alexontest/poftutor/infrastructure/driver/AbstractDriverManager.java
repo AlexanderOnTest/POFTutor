@@ -1,4 +1,4 @@
-package tech.alexontest.poftutor.infrastructure;
+package tech.alexontest.poftutor.infrastructure.driver;
 
 import org.openqa.selenium.WebDriver;
 

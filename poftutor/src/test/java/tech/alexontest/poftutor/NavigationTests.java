@@ -3,12 +3,13 @@ package tech.alexontest.poftutor;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import tech.alexontest.poftutor.infrastructure.AbstractSingleDriverTest;
+import tech.alexontest.poftutor.infrastructure.AbstractTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 @Tag("Navigation")
-class NavigationTests extends AbstractSingleDriverTest {
+class NavigationTests extends AbstractTest {
+
     private final String homePageURL = "https://alexanderontesting.com/";
 
     @ParameterizedTest(name = "{1}")

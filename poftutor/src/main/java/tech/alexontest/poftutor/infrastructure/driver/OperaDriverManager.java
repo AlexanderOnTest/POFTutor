@@ -1,4 +1,4 @@
-package tech.alexontest.poftutor.infrastructure;
+package tech.alexontest.poftutor.infrastructure.driver;
 
 import org.openqa.selenium.opera.OperaDriver;
 import org.openqa.selenium.opera.OperaDriverService;
@@ -9,6 +9,8 @@ import java.io.File;
 import java.io.IOException;
 
 public final class OperaDriverManager extends AbstractDriverManager implements WebDriverManager {
+
+    private static final String OPERA_VERSION = "50.0.2762.67";
 
     private OperaDriverService operaDriverService;
 
@@ -50,7 +52,7 @@ public final class OperaDriverManager extends AbstractDriverManager implements W
     @Override
     public String createDriver() {
         final OperaOptions options = new OperaOptions()
-                .setBinary(new File("C:/Program Files/Opera/50.0.2762.67/opera.exe"));
+                .setBinary(new File("C:/Program Files/Opera/" + OPERA_VERSION + "/opera.exe"));
         // add additional options here as required
         if (!isLocal) {
             setDriver(new RemoteWebDriver(getGridUrl(), options));

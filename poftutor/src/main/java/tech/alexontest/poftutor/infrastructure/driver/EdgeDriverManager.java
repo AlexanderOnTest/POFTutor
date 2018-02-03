@@ -1,4 +1,4 @@
-package tech.alexontest.poftutor.infrastructure;
+package tech.alexontest.poftutor.infrastructure.driver;
 
 import org.openqa.selenium.edge.EdgeDriverService;
 import org.openqa.selenium.edge.EdgeOptions;

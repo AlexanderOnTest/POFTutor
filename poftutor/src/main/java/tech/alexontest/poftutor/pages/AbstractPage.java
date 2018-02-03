@@ -1,4 +1,4 @@
-package tech.alexontest.poftutor;
+package tech.alexontest.poftutor.pages;
 
 import org.openqa.selenium.WebDriver;
 
