@@ -10,7 +10,7 @@ import java.util.List;
 
 public final class PfHomePage extends AbstractPage implements HomePage {
     @FindBy(css = ".site-title")
-    private WebElement pageTitle;
+    private WebElement title;
 
     @FindBy(css = ".widget")
     private List<WebElement> widgets;
@@ -25,8 +25,18 @@ public final class PfHomePage extends AbstractPage implements HomePage {
     }
 
     @Override
-    public String getPageTitle() {
-        return pageTitle.getText();
+    public String getBrowserTabPageTitle() {
+        return "Alexander on Testing – Adventures in Software Testing";
+    }
+
+    @Override
+    public String getURL() {
+        return "https://alexanderontesting.com/";
+    }
+
+    @Override
+    public String getTitle() {
+        return title.getText();
     }
 
     @Override

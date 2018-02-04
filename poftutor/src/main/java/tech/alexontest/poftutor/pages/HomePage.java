@@ -7,6 +7,8 @@ import java.util.List;
 
 @ImplementedBy(PfHomePage.class)
 public interface HomePage extends Page {
+    String getTitle();
+
     List<WebElement> getWidgets();
 
     List<WebElement> getArticles();
