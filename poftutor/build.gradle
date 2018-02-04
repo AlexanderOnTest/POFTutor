@@ -16,6 +16,8 @@ junitPlatform {
     platformVersion '1.0.3'
     reportsDir file('build/test-results/junit-platform')
     enableStandardTestTask true
+    //show results summary even on success.
+    details details.SUMMARY
     filters {
         tags {
             // Framework tests need to be run only when required to verify that this framework is still working.
