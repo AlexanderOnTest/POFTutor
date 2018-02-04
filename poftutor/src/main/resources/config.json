@@ -3,5 +3,5 @@
   "waitTimeout" : {
     "seconds" : "5"
   },
-  "driverType" : "CHROME"
+  "driverType" : "FIREFOX"
 }
