@@ -16,6 +16,10 @@ public final class DriverManagerFactory implements Provider<WebDriverManager> {
 
         final AbstractDriverManager driverManager;
 
+        if (type == null) {
+            throw new IllegalArgumentException("Requested DriverType is not recognised");
+        }
+
         switch (type) {
             case CHROME:
                 driverManager = new ChromeDriverManager(false, false);
