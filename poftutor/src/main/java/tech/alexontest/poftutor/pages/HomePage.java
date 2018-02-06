@@ -5,7 +5,7 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-@ImplementedBy(PfHomePage.class)
+@ImplementedBy(HomePageDesktop.class)
 public interface HomePage extends Page {
     String getTitle();
 

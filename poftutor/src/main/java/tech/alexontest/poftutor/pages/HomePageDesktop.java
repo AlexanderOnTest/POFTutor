@@ -8,7 +8,7 @@ import tech.alexontest.poftutor.infrastructure.driver.WebDriverManager;
 
 import java.util.List;
 
-public final class PfHomePage extends AbstractPage implements HomePage {
+public final class HomePageDesktop extends AbstractPage implements HomePage {
     @FindBy(css = ".site-title")
     private WebElement title;
 
@@ -19,9 +19,9 @@ public final class PfHomePage extends AbstractPage implements HomePage {
     private List<WebElement> articles;
 
     @Inject
-    public PfHomePage(final WebDriverManager webDriverManager) {
-        super(webDriverManager.getDriver());
-        PageFactory.initElements(webDriverManager.getDriver(), this);
+    public HomePageDesktop(final WebDriverManager webDriverManager) {
+        super(webDriverManager);
+        PageFactory.initElements(getDriver(), this);
     }
 
     @Override
