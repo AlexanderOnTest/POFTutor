@@ -1,12 +1,24 @@
-package tech.alexontest.poftutor.infrastructure;
+package tech.alexontest.poftutor.infrastructure.driver;
 
-public final class DriverManagerFactory {
+import com.google.inject.Inject;
+import com.google.inject.Provider;
+import tech.alexontest.poftutor.infrastructure.configuration.TestConfiguration;
 
-    private DriverManagerFactory() { }
+public final class DriverManagerFactory implements Provider<WebDriverManager> {
+    private final TestConfiguration testConfiguration;
+
+    @Inject
+    private DriverManagerFactory(final TestConfiguration testConfiguration) {
+        this.testConfiguration = testConfiguration;
+    }
 
     public static AbstractDriverManager getManager(final DriverType type) {
 
         final AbstractDriverManager driverManager;
+
+        if (type == null) {
+            throw new IllegalArgumentException("Requested DriverType is not recognised");
+        }
 
         switch (type) {
             case CHROME:
@@ -47,5 +59,10 @@ public final class DriverManagerFactory {
         }
         return driverManager;
 
+    }
+
+    @Override
+    public WebDriverManager get() {
+        return getManager(testConfiguration.getDriverType());
     }
 }

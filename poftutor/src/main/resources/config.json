@@ -1,0 +1,7 @@
+{
+  "homePageUrl" : "https://alexanderontesting.com/",
+  "waitTimeout" : {
+    "seconds" : "5"
+  },
+  "driverType" : "FIREFOX"
+}
