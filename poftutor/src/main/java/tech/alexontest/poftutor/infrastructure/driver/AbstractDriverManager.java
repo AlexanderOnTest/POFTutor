@@ -43,7 +43,7 @@ public abstract class AbstractDriverManager implements WebDriverManager {
      * @return the WebDriver to control the browser.
      */
     @Override
-    public WebDriver getDriver() {
+    public WebDriver get() {
         if (null == driver) {
             startService();
             createDriver();

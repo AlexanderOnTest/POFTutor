@@ -1,11 +1,12 @@
-package tech.alexontest.poftutor.infrastructure.configuration;
+package tech.alexontest.poftutor.infrastructure.driver;
 
 import com.google.common.base.Charsets;
 import com.google.common.io.Resources;
 import com.google.gson.Gson;
 import com.google.inject.AbstractModule;
-import tech.alexontest.poftutor.infrastructure.driver.DriverManagerFactory;
-import tech.alexontest.poftutor.infrastructure.driver.WebDriverManager;
+import org.openqa.selenium.WebDriver;
+import tech.alexontest.poftutor.infrastructure.configuration.TestConfiguration;
+import tech.alexontest.poftutor.infrastructure.configuration.TestConfigurationImpl;
 
 import java.io.IOException;
 
@@ -20,8 +21,10 @@ public class DriverFactoryModule extends AbstractModule {
         } catch (final IOException e) {
             throw new IllegalArgumentException("Could not load 'config.json'");
         }
+        final WebDriverManager webDriverManager = new DriverManagerFactory(testConfiguration).get();
         bind(TestConfiguration.class).toInstance(testConfiguration);
-        bind(WebDriverManager.class).toProvider(DriverManagerFactory.class).asEagerSingleton();
+        bind(WebDriverManager.class).toInstance(webDriverManager);
+        bind(WebDriver.class).toProvider(webDriverManager);
     }
 }
 

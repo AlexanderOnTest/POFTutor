@@ -28,7 +28,7 @@ class DriverFactoryTests extends AbstractCrossBrowserTest {
     @MethodSource("arguments")
     // Can be used to pass more complex to construct objects.
     @CsvFileSource(resources = "operaTests.csv")
-    void driverFactoryWorks(final DriverType driverType, final String browserName) {
+    void driverFactoryWorks(final DriverType driverType, final String browserName, final String testName) {
         setDriverManager(DriverManagerFactory.getManager(driverType));
         getDriverManager().startService();
         assertThat(getDriverManager().createDriver())

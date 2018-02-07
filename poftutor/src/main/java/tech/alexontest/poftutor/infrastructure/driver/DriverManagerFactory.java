@@ -8,7 +8,7 @@ public final class DriverManagerFactory implements Provider<WebDriverManager> {
     private final TestConfiguration testConfiguration;
 
     @Inject
-    private DriverManagerFactory(final TestConfiguration testConfiguration) {
+    DriverManagerFactory(final TestConfiguration testConfiguration) {
         this.testConfiguration = testConfiguration;
     }
 

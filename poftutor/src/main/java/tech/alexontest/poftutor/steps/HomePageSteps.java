@@ -3,7 +3,6 @@ package tech.alexontest.poftutor.steps;
 import com.google.inject.Inject;
 import org.openqa.selenium.WebDriver;
 import tech.alexontest.poftutor.infrastructure.configuration.TestConfiguration;
-import tech.alexontest.poftutor.infrastructure.driver.WebDriverManager;
 import tech.alexontest.poftutor.pages.HomePage;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -20,10 +19,10 @@ public class HomePageSteps {
     @Inject
     public HomePageSteps(final HomePage homePage,
                          final TestConfiguration testConfiguration,
-                         final WebDriverManager driverManager) {
+                         final WebDriver webDriver) {
         this.homePage = homePage;
         this.testConfiguration = testConfiguration;
-        webDriver = driverManager.getDriver();
+        this.webDriver = webDriver;
     }
 
     public void loadHomePage() {

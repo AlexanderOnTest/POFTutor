@@ -1,10 +1,10 @@
 package tech.alexontest.poftutor.pages;
 
 import com.google.inject.Inject;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import tech.alexontest.poftutor.infrastructure.driver.WebDriverManager;
 
 import java.util.List;
 
@@ -19,8 +19,8 @@ public final class HomePageDesktop extends AbstractPage implements HomePage {
     private List<WebElement> articles;
 
     @Inject
-    public HomePageDesktop(final WebDriverManager webDriverManager) {
-        super(webDriverManager);
+    public HomePageDesktop(final WebDriver webDriver) {
+        super(webDriver);
         PageFactory.initElements(getDriver(), this);
     }
 
