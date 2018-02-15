@@ -6,7 +6,7 @@ import tech.alexontest.poftutor.infrastructure.driver.WebDriverManager;
 
 /**
  * Abstract Test class that can use different browsers within a single execution.
- * Used for testing the Framework itself. Supports JUnit 5 tests only.
+ * Used for testing the Framework itself. Not suitable for injecting dependencies.
  */
 public abstract class AbstractCrossBrowserTest {
     private WebDriverManager driverManager;

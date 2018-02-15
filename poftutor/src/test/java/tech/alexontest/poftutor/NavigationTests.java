@@ -4,11 +4,11 @@ import com.google.inject.Inject;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import tech.alexontest.poftutor.infrastructure.AbstractTest;
+import tech.alexontest.poftutor.infrastructure.AbstractSingleWebDriverTest;
 import tech.alexontest.poftutor.steps.HomePageSteps;
 
 @Tag("Navigation")
-class NavigationTests extends AbstractTest {
+class NavigationTests extends AbstractSingleWebDriverTest {
 
     @Inject
     private HomePageSteps homePageSteps;

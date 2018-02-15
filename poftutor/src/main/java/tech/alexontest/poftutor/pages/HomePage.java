@@ -12,4 +12,8 @@ public interface HomePage extends Page {
     List<WebElement> getWidgets();
 
     List<WebElement> getArticles();
+
+    String getFooterText();
+
+    List<String> getFooterLinks();
 }

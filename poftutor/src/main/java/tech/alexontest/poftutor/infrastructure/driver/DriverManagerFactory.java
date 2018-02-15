@@ -1,13 +1,14 @@
 package tech.alexontest.poftutor.infrastructure.driver;
 
-import com.google.inject.Inject;
 import com.google.inject.Provider;
 import tech.alexontest.poftutor.infrastructure.configuration.TestConfiguration;
 
 public final class DriverManagerFactory implements Provider<WebDriverManager> {
+
     private final TestConfiguration testConfiguration;
 
-    @Inject
+    private WebDriverManager webDriverManager;
+
     DriverManagerFactory(final TestConfiguration testConfiguration) {
         this.testConfiguration = testConfiguration;
     }
@@ -63,6 +64,9 @@ public final class DriverManagerFactory implements Provider<WebDriverManager> {
 
     @Override
     public WebDriverManager get() {
-        return getManager(testConfiguration.getDriverType());
+        if (webDriverManager == null) {
+            webDriverManager = getManager(testConfiguration.getDriverType());
+        }
+        return webDriverManager;
     }
 }

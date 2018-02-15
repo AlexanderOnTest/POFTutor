@@ -7,6 +7,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public final class HomePageDesktop extends AbstractPage implements HomePage {
     @FindBy(css = ".site-title")
@@ -17,6 +18,12 @@ public final class HomePageDesktop extends AbstractPage implements HomePage {
 
     @FindBy(css = ".post-content")
     private List<WebElement> articles;
+
+    @FindBy(css = ".site-info")
+    private WebElement footerText;
+
+    @FindBy(css = ".site-info a")
+    private List<WebElement> footerLinks;
 
     @Inject
     public HomePageDesktop(final WebDriver webDriver) {
@@ -47,5 +54,17 @@ public final class HomePageDesktop extends AbstractPage implements HomePage {
     @Override
     public List<WebElement> getArticles() {
         return articles;
+    }
+
+    @Override
+    public String getFooterText() {
+        return footerText.getText();
+    }
+
+    @Override
+    public List<String> getFooterLinks() {
+        return footerLinks.stream()
+                .map(we -> we.getAttribute("href"))
+                .collect(Collectors.toList());
     }
 }

@@ -5,6 +5,10 @@ import org.openqa.selenium.WebDriver;
 import tech.alexontest.poftutor.infrastructure.configuration.TestConfiguration;
 import tech.alexontest.poftutor.pages.HomePage;
 
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static tech.alexontest.poftutor.Constants.MAX_POSTS_PER_LISTING_PAGE;
 import static tech.alexontest.poftutor.Constants.WIDGETS_PER_PAGE;
@@ -61,5 +65,32 @@ public class HomePageSteps {
         assertThat(homePage.getWidgets())
                 .size()
                 .isEqualTo(WIDGETS_PER_PAGE);
+    }
+
+    public void assertThatFooterTextIsCorrect() {
+        assertThat(homePage.getFooterText())
+                .as("FooterText is not as expected.")
+                .isEqualTo("© 2018 | Proudly Powered by WordPress | Theme: Nisarg");
+    }
+
+    public void assertThatFooterLinksAreNotBroken() {
+        homePage.getFooterLinks()
+                .forEach(this::checkUrlExists);
+    }
+
+    /**
+     * Crude check that the url leads to a valid page.
+     * @param url the url to check
+     */
+    private void checkUrlExists(final String url) {
+        try {
+            HttpURLConnection.setFollowRedirects(false);
+            final HttpURLConnection conn = (HttpURLConnection) new URL(url).openConnection();
+            conn.setRequestMethod("HEAD");
+            assertThat(conn.getResponseCode())
+                    .isEqualTo(HttpURLConnection.HTTP_OK);
+        } catch (final IOException e) {
+            throw new AssertionError(String.format("Link '%s' does not return a valid response", url));
+        }
     }
 }
