@@ -28,6 +28,9 @@ public final class ChromeDriverManager extends AbstractDriverManager implements 
 
     @Override
     public void startService() {
+        if (!isLocal) {
+            return;
+        }
         if (null == chromeDriverService) {
             try {
                 chromeDriverService = new ChromeDriverService.Builder()

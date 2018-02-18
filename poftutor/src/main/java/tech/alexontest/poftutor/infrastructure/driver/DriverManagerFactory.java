@@ -13,6 +13,7 @@ public final class DriverManagerFactory implements Provider<WebDriverManager> {
         this.testConfiguration = testConfiguration;
     }
 
+    @SuppressWarnings("CyclomaticComplexity")
     public static AbstractDriverManager getManager(final DriverType type) {
 
         final AbstractDriverManager driverManager;
@@ -35,19 +36,31 @@ public final class DriverManagerFactory implements Provider<WebDriverManager> {
                 break;
 
             case EDGE:
-                driverManager = new EdgeDriverManager();
+                driverManager = new EdgeDriverManager(false);
+                break;
+
+            case EDGE_LOCAL:
+                driverManager = new EdgeDriverManager(true);
                 break;
 
             case FIREFOX:
-                driverManager = new FirefoxDriverManager();
+                driverManager = new FirefoxDriverManager(false, false);
+                break;
+
+            case FIREFOX_LOCAL:
+                driverManager = new FirefoxDriverManager(true, false);
+                break;
+
+            case FIREFOX_LOCAL_HEADLESS:
+                driverManager = new FirefoxDriverManager(true, true);
                 break;
 
             case IE:
-                driverManager = new InternetExplorerDriverManager();
+                driverManager = new InternetExplorerDriverManager(false);
                 break;
 
-            case OPERA:
-                driverManager = new OperaDriverManager(false);
+            case IE_LOCAL:
+                driverManager = new InternetExplorerDriverManager(true);
                 break;
 
             case OPERA_LOCAL:
@@ -55,7 +68,7 @@ public final class DriverManagerFactory implements Provider<WebDriverManager> {
                 break;
 
             default:
-                driverManager = new ChromeDriverManager(true, false);
+                driverManager = new FirefoxDriverManager(true, false);
                 break;
         }
         return driverManager;

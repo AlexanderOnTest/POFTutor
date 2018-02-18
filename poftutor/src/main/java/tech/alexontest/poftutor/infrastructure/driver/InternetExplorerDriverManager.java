@@ -1,5 +1,6 @@
 package tech.alexontest.poftutor.infrastructure.driver;
 
+import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.ie.InternetExplorerDriverService;
 import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -13,15 +14,21 @@ public final class InternetExplorerDriverManager extends AbstractDriverManager i
 
     private final File internetExplorerDriverExe;
 
-    InternetExplorerDriverManager() {
+    private final boolean isLocal;
+
+    InternetExplorerDriverManager(final boolean isLocal) {
         final String path = getClass().getClassLoader().getResource("IEDriverServer.exe").getPath();
         internetExplorerDriverExe = new File(path);
         System.setProperty("webdriver.ie.driver", path);
+        this.isLocal = isLocal;
     }
 
     @Override
     public void startService() {
         if (null == internetExplorerDriverService) {
+            if (!isLocal) {
+                return;
+            }
             try {
                 internetExplorerDriverService = new InternetExplorerDriverService.Builder()
                         .usingDriverExecutable(internetExplorerDriverExe)
@@ -47,7 +54,11 @@ public final class InternetExplorerDriverManager extends AbstractDriverManager i
     public String createDriver() {
         final InternetExplorerOptions options = new InternetExplorerOptions();
         //add required options here
-        setDriver(new RemoteWebDriver(getGridUrl(), options));
+        if (!isLocal) {
+            setDriver(new RemoteWebDriver(getGridUrl(), options));
+        } else {
+            setDriver(new InternetExplorerDriver(internetExplorerDriverService, options));
+        }
         System.out.println("InternetExplorerDriver Started");
         return options.getBrowserName();
     }

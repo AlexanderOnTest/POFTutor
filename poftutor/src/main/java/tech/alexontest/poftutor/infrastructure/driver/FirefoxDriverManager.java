@@ -1,5 +1,6 @@
 package tech.alexontest.poftutor.infrastructure.driver;
 
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxDriverLogLevel;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.GeckoDriverService;
@@ -14,14 +15,23 @@ public final class FirefoxDriverManager extends AbstractDriverManager implements
 
     private final File geckoDriverExe;
 
-    FirefoxDriverManager() {
+    private final boolean isLocal;
+
+    private final boolean isHeadless;
+
+    FirefoxDriverManager(final boolean isLocal, final boolean isHeadless) {
         final String path = getClass().getClassLoader().getResource("geckodriver.exe").getPath();
         geckoDriverExe = new File(path);
         System.setProperty("webdriver.gecko.driver", path);
+        this.isLocal = isLocal;
+        this.isHeadless = isHeadless;
     }
 
     @Override
     public void startService() {
+        if (!isLocal) {
+            return;
+        }
         if (null == geckoDriverService) {
             try {
                 geckoDriverService = new GeckoDriverService.Builder()
@@ -50,7 +60,14 @@ public final class FirefoxDriverManager extends AbstractDriverManager implements
                 .setLogLevel(FirefoxDriverLogLevel.ERROR);
         //to stop the debug spam
         // add additional options here as required
-        setDriver(new RemoteWebDriver(getGridUrl(), options));
+        if (!isLocal) {
+            setDriver(new RemoteWebDriver(getGridUrl(), options));
+        } else {
+            if (isHeadless) {
+                options.addArguments("--headless");
+            }
+            setDriver(new FirefoxDriver(geckoDriverService, options));
+        }
         System.out.println("FirefoxDriver Started");
         return options.getBrowserName();
     }
