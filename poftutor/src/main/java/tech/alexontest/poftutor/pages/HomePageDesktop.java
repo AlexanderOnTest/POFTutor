@@ -28,7 +28,7 @@ public final class HomePageDesktop extends AbstractPage implements HomePage {
     @Inject
     public HomePageDesktop(final WebDriver webDriver) {
         super(webDriver);
-        PageFactory.initElements(getDriver(), this);
+        PageFactory.initElements(webDriver, this);
     }
 
     @Override
