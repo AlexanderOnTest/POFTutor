@@ -1,5 +1,6 @@
 package tech.alexontest.poftutor.infrastructure.driver;
 
+import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeDriverService;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -13,14 +14,20 @@ public final class EdgeDriverManager extends AbstractDriverManager implements We
 
     private final File edgeDriverExe;
 
-    EdgeDriverManager() {
+    private final boolean isLocal;
+
+    EdgeDriverManager(final boolean isLocal) {
         final String path = getClass().getClassLoader().getResource("MicrosoftWebDriver.exe").getPath();
         edgeDriverExe = new File(path);
         System.setProperty("webdriver.edge.driver", path);
+        this.isLocal = isLocal;
     }
 
     @Override
     public void startService() {
+        if (!isLocal) {
+            return;
+        }
         if (null == edgeDriverService) {
             try {
                 edgeDriverService = new EdgeDriverService.Builder()
@@ -46,8 +53,11 @@ public final class EdgeDriverManager extends AbstractDriverManager implements We
     @Override
     public String createDriver() {
         final EdgeOptions options = new EdgeOptions();
-        setDriver(new RemoteWebDriver(getGridUrl(), options));
-
+        if (!isLocal) {
+            setDriver(new RemoteWebDriver(getGridUrl(), options));
+        } else {
+            setDriver(new EdgeDriver(edgeDriverService, options));
+        }
         System.out.println("EdgeDriver Started");
         return options.getBrowserName();
     }

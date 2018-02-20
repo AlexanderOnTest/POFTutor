@@ -1,17 +1,19 @@
 package tech.alexontest.poftutor.infrastructure.driver;
 
-import com.google.inject.Inject;
 import com.google.inject.Provider;
 import tech.alexontest.poftutor.infrastructure.configuration.TestConfiguration;
 
 public final class DriverManagerFactory implements Provider<WebDriverManager> {
+
     private final TestConfiguration testConfiguration;
 
-    @Inject
-    private DriverManagerFactory(final TestConfiguration testConfiguration) {
+    private WebDriverManager webDriverManager;
+
+    DriverManagerFactory(final TestConfiguration testConfiguration) {
         this.testConfiguration = testConfiguration;
     }
 
+    @SuppressWarnings("CyclomaticComplexity")
     public static AbstractDriverManager getManager(final DriverType type) {
 
         final AbstractDriverManager driverManager;
@@ -34,19 +36,31 @@ public final class DriverManagerFactory implements Provider<WebDriverManager> {
                 break;
 
             case EDGE:
-                driverManager = new EdgeDriverManager();
+                driverManager = new EdgeDriverManager(false);
+                break;
+
+            case EDGE_LOCAL:
+                driverManager = new EdgeDriverManager(true);
                 break;
 
             case FIREFOX:
-                driverManager = new FirefoxDriverManager();
+                driverManager = new FirefoxDriverManager(false, false);
+                break;
+
+            case FIREFOX_LOCAL:
+                driverManager = new FirefoxDriverManager(true, false);
+                break;
+
+            case FIREFOX_LOCAL_HEADLESS:
+                driverManager = new FirefoxDriverManager(true, true);
                 break;
 
             case IE:
-                driverManager = new InternetExplorerDriverManager();
+                driverManager = new InternetExplorerDriverManager(false);
                 break;
 
-            case OPERA:
-                driverManager = new OperaDriverManager(false);
+            case IE_LOCAL:
+                driverManager = new InternetExplorerDriverManager(true);
                 break;
 
             case OPERA_LOCAL:
@@ -54,7 +68,7 @@ public final class DriverManagerFactory implements Provider<WebDriverManager> {
                 break;
 
             default:
-                driverManager = new ChromeDriverManager(true, false);
+                driverManager = new FirefoxDriverManager(true, false);
                 break;
         }
         return driverManager;
@@ -63,6 +77,9 @@ public final class DriverManagerFactory implements Provider<WebDriverManager> {
 
     @Override
     public WebDriverManager get() {
-        return getManager(testConfiguration.getDriverType());
+        if (webDriverManager == null) {
+            webDriverManager = getManager(testConfiguration.getDriverType());
+        }
+        return webDriverManager;
     }
 }
