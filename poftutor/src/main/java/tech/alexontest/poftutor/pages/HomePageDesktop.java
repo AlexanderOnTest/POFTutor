@@ -8,7 +8,6 @@ import org.openqa.selenium.support.FindBy;
 import tech.alexontest.poftutor.pageblocks.PostSummaryBlock;
 import tech.alexontest.poftutor.pageblocks.PostSummaryBlockDesktop;
 import tech.alexontest.poftutor.pageblocks.TagCloudWidgetBlock;
-import tech.alexontest.poftutor.pageblocks.TagCloudWidgetBlockDesktop;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -33,12 +32,12 @@ public final class HomePageDesktop extends AbstractPage implements HomePage {
     @FindBy(css = ".site-info a")
     private List<WebElement> footerLinks;
 
-    private final TagCloudWidgetBlockDesktop tagCloudWidgetBlockDesktop;
+    private final TagCloudWidgetBlock tagCloudWidgetBlock;
 
     @Inject
-    public HomePageDesktop(final WebDriver webDriver, final TagCloudWidgetBlockDesktop tagCloudWidgetBlockDesktop) {
+    public HomePageDesktop(final WebDriver webDriver, final TagCloudWidgetBlock tagCloudWidgetBlock) {
         super(webDriver);
-        this.tagCloudWidgetBlockDesktop = tagCloudWidgetBlockDesktop;
+        this.tagCloudWidgetBlock = tagCloudWidgetBlock;
     }
 
     @Override
@@ -70,7 +69,7 @@ public final class HomePageDesktop extends AbstractPage implements HomePage {
 
     @Override
     public TagCloudWidgetBlock getTagCloudWidgetBlock() {
-        return tagCloudWidgetBlockDesktop;
+        return tagCloudWidgetBlock;
     }
 
     @Override
