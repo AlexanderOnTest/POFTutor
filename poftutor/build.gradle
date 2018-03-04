@@ -55,6 +55,7 @@ dependencies {
     compile group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: junitVersion
     compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.8.1'
     compile group: 'org.assertj', name: 'assertj-core', version: '3.9.0'
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.7'
 
     testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-params', version: junitVersion
 
