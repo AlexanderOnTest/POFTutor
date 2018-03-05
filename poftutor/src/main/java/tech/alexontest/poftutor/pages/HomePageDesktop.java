@@ -3,20 +3,27 @@ package tech.alexontest.poftutor.pages;
 import com.google.inject.Inject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
+import tech.alexontest.poftutor.pageblocks.PostSummaryBlock;
+import tech.alexontest.poftutor.pageblocks.PostSummaryBlockDesktop;
+import tech.alexontest.poftutor.pageblocks.TagCloudWidgetBlock;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 public final class HomePageDesktop extends AbstractPage implements HomePage {
+
     @FindBy(css = ".site-title")
+    @CacheLookup
     private WebElement title;
 
     @FindBy(css = ".widget")
+    @CacheLookup
     private List<WebElement> widgets;
 
     @FindBy(css = ".post-content")
+    @CacheLookup
     private List<WebElement> articles;
 
     @FindBy(css = ".site-info")
@@ -25,10 +32,12 @@ public final class HomePageDesktop extends AbstractPage implements HomePage {
     @FindBy(css = ".site-info a")
     private List<WebElement> footerLinks;
 
+    private final TagCloudWidgetBlock tagCloudWidgetBlock;
+
     @Inject
-    public HomePageDesktop(final WebDriver webDriver) {
+    public HomePageDesktop(final WebDriver webDriver, final TagCloudWidgetBlock tagCloudWidgetBlock) {
         super(webDriver);
-        PageFactory.initElements(webDriver, this);
+        this.tagCloudWidgetBlock = tagCloudWidgetBlock;
     }
 
     @Override
@@ -47,13 +56,20 @@ public final class HomePageDesktop extends AbstractPage implements HomePage {
     }
 
     @Override
-    public List<WebElement> getWidgets() {
-        return widgets;
+    public int getWidgetCount() {
+        return widgets.size();
     }
 
     @Override
-    public List<WebElement> getArticles() {
-        return articles;
+    public List<PostSummaryBlock> getArticles() {
+        return articles.stream()
+                .map(PostSummaryBlockDesktop::new)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public TagCloudWidgetBlock getTagCloudWidgetBlock() {
+        return tagCloudWidgetBlock;
     }
 
     @Override

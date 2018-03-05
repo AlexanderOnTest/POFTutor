@@ -1,7 +1,8 @@
 package tech.alexontest.poftutor.pages;
 
 import com.google.inject.ImplementedBy;
-import org.openqa.selenium.WebElement;
+import tech.alexontest.poftutor.pageblocks.PostSummaryBlock;
+import tech.alexontest.poftutor.pageblocks.TagCloudWidgetBlock;
 
 import java.util.List;
 
@@ -9,9 +10,11 @@ import java.util.List;
 public interface HomePage extends Page {
     String getTitle();
 
-    List<WebElement> getWidgets();
+    int getWidgetCount();
 
-    List<WebElement> getArticles();
+    List<PostSummaryBlock> getArticles();
+
+    TagCloudWidgetBlock getTagCloudWidgetBlock();
 
     String getFooterText();
 
