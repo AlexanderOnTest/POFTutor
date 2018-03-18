@@ -5,7 +5,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.pagefactory.DefaultElementLocator;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
-import tech.alexontest.poftutor.pageblocks.Block;
 
 import java.lang.reflect.Field;
 

@@ -48,4 +48,16 @@ class HomePageTests extends AbstractSingleWebDriverTest {
     void pageContainsUpToFiveArticles() {
         homePageSteps.assertThatPageContainsUpToFiveArticles();
     }
+
+    @Test
+    @DisplayName("Footer Text is correct.")
+    void footerTextIsCorrect() {
+        homePageSteps.assertThatFooterTextIsCorrect();
+    }
+
+    @Test
+    @DisplayName("Footer Links are valid.")
+    void footerLinksAreValid() {
+        homePageSteps.assertThatFooterLinksAreNotBroken();
+    }
 }

@@ -3,7 +3,6 @@ package tech.alexontest.poftutor.steps;
 import com.google.inject.Inject;
 import org.openqa.selenium.WebDriver;
 import tech.alexontest.poftutor.infrastructure.configuration.TestConfiguration;
-import tech.alexontest.poftutor.pageblocks.PostSummaryBlock;
 import tech.alexontest.poftutor.pages.HomePage;
 
 import java.io.IOException;
@@ -94,49 +93,10 @@ public class HomePageSteps {
         }
     }
 
-    public HomePageSteps verifyThatBlockRootElementWorks() {
-
-        assertThat(homePage.getArticles().get(0).getRootElement().getTagName())
-                .as("runtime constructed Block rootElement Locator works correctly.")
-                .isEqualToIgnoringCase("article");
-
-        assertThat(homePage.getTagCloudWidgetBlock().getRootElement().getText())
-                .as("Finder defined Block rootElement Locator works correctly.")
-                .startsWith("TAGS");
-        return this;
-    }
-
-    public HomePageSteps printAllPostDetails() {
-        homePage.getArticles()
-                .forEach(this::printSummaryBlockDetails);
-        return this;
-    }
-
-    private void printSummaryBlockDetails(final PostSummaryBlock postSummaryBlock) {
-        System.out.println("Details of Summary Block:");
-        System.out.println("");
-        System.out.println(postSummaryBlock.getPostTitle() + " = Title");
-        System.out.println(postSummaryBlock.getPostDate() + " = Date posted text");
-        System.out.println(postSummaryBlock.getAuthorName() + " = Author");
-        System.out.println("Post summary:");
-        System.out.println(postSummaryBlock.getPostSummary());
-        System.out.println(postSummaryBlock.getReadMore() + " = Read more button text");
-        System.out.println("");
-        System.out.println("---------------------------------------------------------------------------");
-        System.out.println("");
-    }
-
     public HomePageSteps assertTagCloudTitle() {
         assertThat(homePage.getTagCloudWidgetBlock().getTitle())
                 .as("Tag Could Title is correct")
                 .isEqualToIgnoringCase("Tags");
-        return this;
-    }
-
-    public HomePageSteps printTags() {
-        homePage.getTagCloudWidgetBlock()
-                .getTags()
-                .forEach(p -> System.out.println(p.getLeft() + " : " + p.getRight()));
         return this;
     }
 }
