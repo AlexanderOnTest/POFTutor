@@ -1,33 +1,5 @@
-import org.gradle.api.tasks.testing.junitplatform.JUnitPlatformOptions
-
 group 'tech.alexontest'
 version '1.0-SNAPSHOT'
-
-/*buildscript {
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        classpath 'org.junit.platform:junit-platform-gradle-plugin:1.0.3'
-    }
-}
-
-apply plugin: 'org.junit.platform.gradle.plugin'
-
-junitPlatform {
-    platformVersion '1.0.3'
-    reportsDir file('build/test-results/junit-platform')
-    enableStandardTestTask true
-    //show results summary even on success.
-    details details.SUMMARY
-    filters {
-        tags {
-            // Framework tests need to be run only when required to verify that this framework is still working.
-            exclude "Framework"
-        }
-        includeClassNamePatterns '.*Test', '.*Tests'
-    }
-}*/
 
 apply plugin: 'java'
 sourceCompatibility = 1.8
@@ -66,12 +38,13 @@ dependencies {
 }
 
 test {
-    /*def options = new JUnitPlatformOptions()
-    options.setIncludeTags(["Framework"] as Set)*/
     useJUnitPlatform()
-//    def excludeDirs = ["**/webdriver/*", "**/pagefactory/*"] as List
-//    exclude(["**/webdriver/*", "**/pagefactory/*"] as List)
+    // use the syntax below to exclude based on filepath
+    // exclude(["**/webdriver/*", "**/pagefactory/*"] as List)
+    // The syntax below works for Tags BUT only given Strings Tag objects not supported
     options {
         setExcludeTags(["Framework", "Blocking", "Navigation"] as Set)
     }
+    // Finally we have access to parallel running for junit 5 tests!
+    maxParallelForks 4
 }
