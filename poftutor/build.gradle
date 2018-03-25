@@ -41,7 +41,7 @@ test {
     useJUnitPlatform()
     // use the syntax below to exclude based on filepath
     // exclude(["**/webdriver/*", "**/pagefactory/*"] as List)
-    // The syntax below works for Tags BUT only given Strings Tag objects not supported
+    // The syntax below works for Tags BUT only given Strings - passing Tag objects not supported
     options {
         setExcludeTags(["Framework", "Blocking", "Navigation"] as Set)
     }

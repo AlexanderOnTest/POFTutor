@@ -1,6 +1,7 @@
 package tech.alexontest.poftutor.pages;
 
 import com.google.inject.ImplementedBy;
+import tech.alexontest.poftutor.infrastructure.pagefactory.Page;
 import tech.alexontest.poftutor.pageblocks.PostSummaryBlock;
 import tech.alexontest.poftutor.pageblocks.TagCloudWidgetBlock;
 
