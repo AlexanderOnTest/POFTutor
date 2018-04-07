@@ -5,6 +5,7 @@ import org.apache.commons.lang3.tuple.Pair;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import tech.alexontest.poftutor.infrastructure.pagefactory.AbstractDefinedBlock;
 
 import java.util.List;
 import java.util.stream.Collectors;

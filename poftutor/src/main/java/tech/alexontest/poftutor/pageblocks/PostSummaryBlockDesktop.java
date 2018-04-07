@@ -3,6 +3,7 @@ package tech.alexontest.poftutor.pageblocks;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
+import tech.alexontest.poftutor.infrastructure.pagefactory.AbstractFoundBlock;
 
 public class PostSummaryBlockDesktop extends AbstractFoundBlock implements PostSummaryBlock {
 

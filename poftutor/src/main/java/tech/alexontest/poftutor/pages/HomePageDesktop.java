@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
+import tech.alexontest.poftutor.infrastructure.pagefactory.AbstractPage;
 import tech.alexontest.poftutor.pageblocks.PostSummaryBlock;
 import tech.alexontest.poftutor.pageblocks.PostSummaryBlockDesktop;
 import tech.alexontest.poftutor.pageblocks.TagCloudWidgetBlock;

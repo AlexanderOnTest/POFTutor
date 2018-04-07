@@ -1,4 +1,4 @@
-package tech.alexontest.poftutor;
+package tech.alexontest.poftutor.webdriver;
 
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.params.ParameterizedTest;

@@ -1,4 +1,4 @@
-package tech.alexontest.poftutor.pages;
+package tech.alexontest.poftutor.infrastructure.pagefactory;
 
 public interface Page {
     String getBrowserTabPageTitle();
