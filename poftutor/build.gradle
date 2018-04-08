@@ -30,6 +30,7 @@ dependencies {
     compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.11.0'
     compile group: 'org.assertj', name: 'assertj-core', version: '3.9.0'
     compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.7'
+    compile group: 'org.awaitility', name: 'awaitility', version: '3.1.0'
 
     testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-params', version: junitVersion
     testCompile group: 'org.mockito', name: 'mockito-core', version: '2.7.22'
