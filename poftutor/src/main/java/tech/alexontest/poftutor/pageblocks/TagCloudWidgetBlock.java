@@ -11,4 +11,6 @@ public interface TagCloudWidgetBlock extends Block {
     String getTitle();
 
     List<Pair<String, String>> getTags();
+
+    List<String> getProminentTags();
 }

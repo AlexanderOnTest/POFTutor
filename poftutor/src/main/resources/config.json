@@ -4,5 +4,5 @@
     "value" : "5",
     "unit" : "SECONDS"
   },
-  "driverType" : "FIREFOX_LOCAL"
+  "driverType" : "FIREFOX"
 }

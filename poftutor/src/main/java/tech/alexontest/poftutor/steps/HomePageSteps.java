@@ -3,7 +3,7 @@ package tech.alexontest.poftutor.steps;
 import com.google.inject.Inject;
 import org.openqa.selenium.WebDriver;
 import tech.alexontest.poftutor.infrastructure.configuration.TestConfiguration;
-import tech.alexontest.poftutor.pages.HomePage;
+import tech.alexontest.poftutor.pages.ListingPage;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
@@ -14,7 +14,7 @@ import static tech.alexontest.poftutor.Constants.MAX_POSTS_PER_LISTING_PAGE;
 import static tech.alexontest.poftutor.Constants.WIDGETS_PER_PAGE;
 
 public class HomePageSteps {
-    private final HomePage homePage;
+    private final ListingPage homePage;
 
     private final TestConfiguration testConfiguration;
 
@@ -23,7 +23,7 @@ public class HomePageSteps {
     @Inject
     public HomePageSteps(final TestConfiguration testConfiguration,
                          final WebDriver webDriver,
-                         final HomePage homePage) {
+                         final ListingPage homePage) {
         this.testConfiguration = testConfiguration;
         this.webDriver = webDriver;
         this.homePage = homePage;
@@ -51,7 +51,7 @@ public class HomePageSteps {
     }
 
     public void assertThatTitleIsCorrect() {
-        assertThat(homePage.getTitle())
+        assertThat(homePage.getSiteTitle())
                 .isEqualToIgnoringCase("Alexander on Testing");
     }
 
@@ -91,12 +91,5 @@ public class HomePageSteps {
         } catch (final IOException e) {
             throw new AssertionError(String.format("Link '%s' does not return a valid response", url));
         }
-    }
-
-    public HomePageSteps assertTagCloudTitle() {
-        assertThat(homePage.getTagCloudWidgetBlock().getTitle())
-                .as("Tag Could Title is correct")
-                .isEqualToIgnoringCase("Tags");
-        return this;
     }
 }

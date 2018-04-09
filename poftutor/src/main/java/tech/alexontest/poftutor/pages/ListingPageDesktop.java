@@ -8,16 +8,15 @@ import org.openqa.selenium.support.FindBy;
 import tech.alexontest.poftutor.infrastructure.pagefactory.AbstractPage;
 import tech.alexontest.poftutor.pageblocks.PostSummaryBlock;
 import tech.alexontest.poftutor.pageblocks.PostSummaryBlockDesktop;
-import tech.alexontest.poftutor.pageblocks.TagCloudWidgetBlock;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-public final class HomePageDesktop extends AbstractPage implements HomePage {
+public class ListingPageDesktop extends AbstractPage implements ListingPage {
 
     @FindBy(css = ".site-title")
     @CacheLookup
-    private WebElement title;
+    private WebElement siteTitle;
 
     @FindBy(css = ".widget")
     @CacheLookup
@@ -33,12 +32,9 @@ public final class HomePageDesktop extends AbstractPage implements HomePage {
     @FindBy(css = ".site-info a")
     private List<WebElement> footerLinks;
 
-    private final TagCloudWidgetBlock tagCloudWidgetBlock;
-
     @Inject
-    public HomePageDesktop(final WebDriver webDriver, final TagCloudWidgetBlock tagCloudWidgetBlock) {
+    ListingPageDesktop(final WebDriver webDriver) {
         super(webDriver);
-        this.tagCloudWidgetBlock = tagCloudWidgetBlock;
     }
 
     @Override
@@ -52,8 +48,8 @@ public final class HomePageDesktop extends AbstractPage implements HomePage {
     }
 
     @Override
-    public String getTitle() {
-        return title.getText();
+    public String getSiteTitle() {
+        return siteTitle.getText();
     }
 
     @Override
@@ -66,11 +62,6 @@ public final class HomePageDesktop extends AbstractPage implements HomePage {
         return articles.stream()
                 .map(PostSummaryBlockDesktop::new)
                 .collect(Collectors.toList());
-    }
-
-    @Override
-    public TagCloudWidgetBlock getTagCloudWidgetBlock() {
-        return tagCloudWidgetBlock;
     }
 
     @Override

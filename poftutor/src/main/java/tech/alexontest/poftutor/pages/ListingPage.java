@@ -3,19 +3,16 @@ package tech.alexontest.poftutor.pages;
 import com.google.inject.ImplementedBy;
 import tech.alexontest.poftutor.infrastructure.pagefactory.Page;
 import tech.alexontest.poftutor.pageblocks.PostSummaryBlock;
-import tech.alexontest.poftutor.pageblocks.TagCloudWidgetBlock;
 
 import java.util.List;
 
-@ImplementedBy(HomePageDesktop.class)
-public interface HomePage extends Page {
-    String getTitle();
+@ImplementedBy(ListingPageDesktop.class)
+public interface ListingPage extends Page {
+    String getSiteTitle();
 
     int getWidgetCount();
 
     List<PostSummaryBlock> getArticles();
-
-    TagCloudWidgetBlock getTagCloudWidgetBlock();
 
     String getFooterText();
 
