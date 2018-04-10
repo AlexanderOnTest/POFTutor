@@ -50,17 +50,21 @@ class EveryPageWidgetTests extends AbstractSingleWebDriverTest {
     }
 
     @Test
-    @Disabled
     @DisplayName("The 'Categories' widget is displayed correctly")
     void categoriesWidgetIsCorrect() {
-        //TODO
+        widgetSteps.verifyCategoriesWidgetLayout();
     }
 
     @Test
-    @Disabled
     @DisplayName("The 'archives' widget is displayed correctly")
     void archivesWidgetIsCorrect() {
-        //TODO
+        widgetSteps.verifyArchivesWidgetLayout();
+    }
+
+    @Test
+    @DisplayName("The 'archives' widget links are all valid")
+    void archivesWidgetLinksAreNotBroken() {
+        widgetSteps.verifyArchivesLinksAreValid();
     }
 
     @Test

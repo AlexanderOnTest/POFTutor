@@ -31,11 +31,6 @@ public class TagCloudWidgetBlockDesktop extends AbstractDefinedBlock implements 
     }
 
     @Override
-    public WebElement getRootElement() {
-        return rootElement;
-    }
-
-    @Override
     public String getTitle() {
         return title.getText();
     }

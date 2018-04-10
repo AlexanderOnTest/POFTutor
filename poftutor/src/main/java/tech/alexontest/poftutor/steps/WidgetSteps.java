@@ -3,6 +3,8 @@ package tech.alexontest.poftutor.steps;
 import com.google.common.collect.ImmutableList;
 import com.google.inject.Inject;
 import org.openqa.selenium.NoSuchElementException;
+import tech.alexontest.poftutor.pageblocks.ArchivesWidgetBlock;
+import tech.alexontest.poftutor.pageblocks.CategoriesWidgetBlock;
 import tech.alexontest.poftutor.pageblocks.SearchWidgetBlock;
 import tech.alexontest.poftutor.pageblocks.TagCloudWidgetBlock;
 import tech.alexontest.poftutor.pages.SearchResultsPage;
@@ -12,23 +14,32 @@ import java.util.concurrent.TimeUnit;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.awaitility.Awaitility.await;
+import static tech.alexontest.poftutor.infrastructure.HttpTools.assertLinkIsNotBroken;
 
 public class WidgetSteps {
+    private final SearchWidgetBlock searchWidgetBlock;
+
     private final TagCloudWidgetBlock tagCloudWidgetBlock;
 
-    private final SearchWidgetBlock searchWidgetBlock;
+    private final CategoriesWidgetBlock categoriesWidgetBlock;
+
+    private final ArchivesWidgetBlock archivesWidgetBlock;
 
     private final SearchResultsPage searchResultsPage;
 
     private final SearchResultsSteps searchResultsSteps;
 
     @Inject
-    public WidgetSteps(final TagCloudWidgetBlock tagCloudWidgetBlock,
-                       final SearchWidgetBlock searchWidgetBlock,
+    public WidgetSteps(final SearchWidgetBlock searchWidgetBlock,
+                       final TagCloudWidgetBlock tagCloudWidgetBlock,
+                       final CategoriesWidgetBlock categoriesWidgetBlock,
+                       final ArchivesWidgetBlock archivesWidgetBlock,
                        final SearchResultsPage searchResultsPage,
                        final SearchResultsSteps searchResultsSteps) {
-        this.tagCloudWidgetBlock = tagCloudWidgetBlock;
         this.searchWidgetBlock = searchWidgetBlock;
+        this.tagCloudWidgetBlock = tagCloudWidgetBlock;
+        this.categoriesWidgetBlock = categoriesWidgetBlock;
+        this.archivesWidgetBlock = archivesWidgetBlock;
         this.searchResultsPage = searchResultsPage;
         this.searchResultsSteps = searchResultsSteps;
     }
@@ -91,4 +102,41 @@ public class WidgetSteps {
         return this;
     }
 
+    public WidgetSteps verifyCategoriesWidgetLayout() {
+        final List<String> expectedCategories = ImmutableList.of(
+                "DevOps",
+                "PageFactory Tutorial",
+                "Software Development Life Cycle",
+                "Technology Updates",
+                "WordPress Implementation"
+        );
+
+        assertThat(categoriesWidgetBlock.getTitle())
+                .as("Widget title is incorrect")
+                .isEqualToIgnoringCase("Categories");
+
+        assertThat(expectedCategories)
+                .as("The most important Tags are prominent")
+                .isSubsetOf(categoriesWidgetBlock.getCategories());
+        return this;
+    }
+
+    public WidgetSteps verifyArchivesWidgetLayout() {
+
+        assertThat(archivesWidgetBlock.getTitle())
+                .as("Widget title is incorrect")
+                .isEqualToIgnoringCase("Archives");
+
+        assertThat(archivesWidgetBlock.getMonths().size())
+                .as("Some months tags appear")
+                .isGreaterThanOrEqualTo(9);
+        return this;
+    }
+
+    public WidgetSteps verifyArchivesLinksAreValid() {
+        //This link checking is intrinsically slow. Parallelism here halves the time taken.
+        archivesWidgetBlock.getMonths().parallelStream()
+                .forEach(p -> assertLinkIsNotBroken(p.getRight()));
+        return this;
+    }
 }

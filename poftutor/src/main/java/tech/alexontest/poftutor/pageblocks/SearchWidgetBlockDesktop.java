@@ -30,11 +30,6 @@ public class SearchWidgetBlockDesktop extends AbstractDefinedBlock implements Se
     }
 
     @Override
-    public WebElement getRootElement() {
-        return rootElement;
-    }
-
-    @Override
     public SearchWidgetBlock enterSearchText(final String searchText) {
         searchInput.clear();
         searchInput.sendKeys(searchText);
