@@ -2,7 +2,6 @@ package tech.alexontest.poftutor;
 
 import com.google.inject.Inject;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -12,7 +11,7 @@ import tech.alexontest.poftutor.steps.WidgetSteps;
 
 @Tag("Content")
 @Tag("Widgets")
-class EveryPageWidgetTests extends AbstractSingleWebDriverTest {
+class GeneralWidgetTests extends AbstractSingleWebDriverTest {
 
     @Inject
     private HomePageSteps homePageSteps;
@@ -68,9 +67,8 @@ class EveryPageWidgetTests extends AbstractSingleWebDriverTest {
     }
 
     @Test
-    @Disabled
     @DisplayName("The 'meta' widget is displayed correctly")
     void metaWidgetIsCorrect() {
-        //TODO
+        widgetSteps.verifyMetaWidgetLayout();
     }
 }
