@@ -8,7 +8,11 @@ import org.openqa.selenium.support.FindBy;
 import tech.alexontest.poftutor.infrastructure.pagefactory.AbstractDefinedBlock;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class TagCloudWidgetBlockDesktop extends AbstractDefinedBlock implements TagCloudWidgetBlock {
 
@@ -27,11 +31,6 @@ public class TagCloudWidgetBlockDesktop extends AbstractDefinedBlock implements 
     }
 
     @Override
-    public WebElement getRootElement() {
-        return rootElement;
-    }
-
-    @Override
     public String getTitle() {
         return title.getText();
     }
@@ -41,5 +40,23 @@ public class TagCloudWidgetBlockDesktop extends AbstractDefinedBlock implements 
         return tags.stream()
                 .map(we -> Pair.of(we.getText(), we.getAttribute("style")))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<String> getProminentTags() {
+        return tags.stream()
+                .map(this::returnTagNameIfProminent)
+                .filter(s -> !s.isEmpty())
+                .collect(Collectors.toList());
+    }
+
+    private String returnTagNameIfProminent(final WebElement tag) {
+        final Pattern regex = Pattern.compile("(\\d+)");
+        final Matcher matcher = regex.matcher(tag.getAttribute("style"));
+        assertThat(matcher.find())
+                .as("The Tag did not include a font size style as expected.")
+                .isTrue();
+        // return the Tag name only if the font size > 15
+        return Integer.parseInt(matcher.group(1)) > 15 ? tag.getText() : "";
     }
 }

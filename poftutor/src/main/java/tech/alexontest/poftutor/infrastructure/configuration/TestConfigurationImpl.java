@@ -1,8 +1,7 @@
 package tech.alexontest.poftutor.infrastructure.configuration;
 
+import org.awaitility.Duration;
 import tech.alexontest.poftutor.infrastructure.driver.DriverType;
-
-import java.time.Duration;
 
 public class TestConfigurationImpl implements TestConfiguration {
     private String homePageUrl;

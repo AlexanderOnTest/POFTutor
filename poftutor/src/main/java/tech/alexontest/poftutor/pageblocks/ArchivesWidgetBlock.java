@@ -6,11 +6,9 @@ import tech.alexontest.poftutor.infrastructure.pagefactory.Block;
 
 import java.util.List;
 
-@ImplementedBy(TagCloudWidgetBlockDesktop.class)
-public interface TagCloudWidgetBlock extends Block {
+@ImplementedBy(ArchivesWidgetBlockDesktop.class)
+public interface ArchivesWidgetBlock extends Block {
     String getTitle();
 
-    List<Pair<String, String>> getTags();
-
-    List<String> getProminentTags();
+    List<Pair<String, String>> getMonths();
 }

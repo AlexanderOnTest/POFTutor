@@ -38,12 +38,6 @@ class HomePageTests extends AbstractSingleWebDriverTest {
     }
 
     @Test
-    @DisplayName("5 Widgets appear on the Homepage")
-    void pageContainsFiveWidgets() {
-        homePageSteps.assertThatPageContainsFiveWidgets();
-    }
-
-    @Test
     @DisplayName("No more than 5 posts are linked on the Homepage")
     void pageContainsUpToFiveArticles() {
         homePageSteps.assertThatPageContainsUpToFiveArticles();
