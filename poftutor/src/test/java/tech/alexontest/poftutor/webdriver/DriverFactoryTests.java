@@ -19,11 +19,11 @@ class DriverFactoryTests extends AbstractCrossBrowserTest {
     @EnumSource(DriverType.class)
     //Examples of how to filter which tests to run
     //  Debugging one that is failing.
-    //@EnumSource(value = DriverType.class, names = "FIREFOX_LOCAL_HEADLESS")
+    //@EnumSource(value = DriverType.class, names = "FIREFOX_MACOS")
     //  Exclude some values.
     //@EnumSource(value = DriverType.class, mode = EXCLUDE, names = {"OPERA_LOCAL", "FIREFOX_LOCAL"})
     //  Match a set of values e.g. run all local browsers only.
-    //@EnumSource(value = DriverType.class, mode = MATCH_ALL, names = "^.*LOCAL.*$")
+    //@EnumSource(value = DriverType.class, mode = MATCH_ALL, names = "^.*FIREFOX.*$")
     void driverFactoryWorks(final DriverType driverType) {
         final String browserName = driverType.getWebdriverName();
 

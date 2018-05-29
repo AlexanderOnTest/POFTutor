@@ -1,6 +1,7 @@
 package tech.alexontest.poftutor.infrastructure.driver;
 
 import com.google.inject.Provider;
+import org.openqa.selenium.Platform;
 import tech.alexontest.poftutor.infrastructure.configuration.TestConfiguration;
 
 public final class DriverManagerFactory implements Provider<WebDriverManager> {
@@ -35,6 +36,10 @@ public final class DriverManagerFactory implements Provider<WebDriverManager> {
                 driverManager = new ChromeDriverManager(true, true);
                 break;
 
+            case CHROME_MACOS:
+                driverManager = new ChromeDriverManager(false, false, Platform.MAC);
+                break;
+
             case EDGE:
                 driverManager = new EdgeDriverManager(false);
                 break;
@@ -55,6 +60,10 @@ public final class DriverManagerFactory implements Provider<WebDriverManager> {
                 driverManager = new FirefoxDriverManager(true, true);
                 break;
 
+            case FIREFOX_MACOS:
+                driverManager = new FirefoxDriverManager(false, false, "MAC");
+                break;
+
             case IE:
                 driverManager = new InternetExplorerDriverManager(false);
                 break;
@@ -67,9 +76,14 @@ public final class DriverManagerFactory implements Provider<WebDriverManager> {
                 driverManager = new OperaDriverManager(true);
                 break;
 
-            default:
-                driverManager = new FirefoxDriverManager(true, false);
+            case SAFARI_MACOS:
+                driverManager = new SafariDriverManager(false, false);
                 break;
+
+            default:
+                throw new UnsupportedOperationException(
+                        String.format("Requested Browser '%s' has not yet been implemented.",
+                                type));
         }
         return driverManager;
 

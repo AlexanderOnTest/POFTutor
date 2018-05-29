@@ -1,5 +1,6 @@
 package tech.alexontest.poftutor.infrastructure.driver;
 
+import org.openqa.selenium.Platform;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxDriverLogLevel;
 import org.openqa.selenium.firefox.FirefoxOptions;
@@ -19,12 +20,19 @@ public final class FirefoxDriverManager extends AbstractDriverManager implements
 
     private final boolean isHeadless;
 
+    private final String platform;
+
     FirefoxDriverManager(final boolean isLocal, final boolean isHeadless) {
+        this(isLocal, isHeadless, "WIN10");
+    }
+
+    FirefoxDriverManager(final boolean isLocal, final boolean isHeadless, final String platform) {
         final String path = getClass().getClassLoader().getResource("geckodriver.exe").getPath();
         geckoDriverExe = new File(path);
         System.setProperty("webdriver.gecko.driver", path);
         this.isLocal = isLocal;
         this.isHeadless = isHeadless;
+        this.platform = platform;
     }
 
     @Override
@@ -57,15 +65,17 @@ public final class FirefoxDriverManager extends AbstractDriverManager implements
     @Override
     public String createDriver() {
         final FirefoxOptions options = new FirefoxOptions()
+                .setHeadless(isHeadless)
                 .setLogLevel(FirefoxDriverLogLevel.ERROR);
         //to stop the debug spam
         // add additional options here as required
         if (!isLocal) {
+            if (!Platform.WIN10.toString().equals(platform)) {
+                // This is messy but sending platform WIN10 fails so only set for MacOs
+                options.setCapability("platform", platform);
+            }
             setDriver(new RemoteWebDriver(getGridUrl(), options));
         } else {
-            if (isHeadless) {
-                options.addArguments("--headless");
-            }
             setDriver(new FirefoxDriver(geckoDriverService, options));
         }
         System.out.println("FirefoxDriver Started");

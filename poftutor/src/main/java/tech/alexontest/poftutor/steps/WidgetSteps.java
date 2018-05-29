@@ -3,20 +3,16 @@ package tech.alexontest.poftutor.steps;
 import com.google.common.collect.ImmutableList;
 import com.google.inject.Inject;
 import org.apache.commons.lang3.tuple.Pair;
-import org.openqa.selenium.NoSuchElementException;
 import tech.alexontest.poftutor.pageblocks.ArchivesWidgetBlock;
 import tech.alexontest.poftutor.pageblocks.CategoriesWidgetBlock;
 import tech.alexontest.poftutor.pageblocks.MetaWidgetBlock;
 import tech.alexontest.poftutor.pageblocks.SearchWidgetBlock;
 import tech.alexontest.poftutor.pageblocks.TagCloudWidgetBlock;
-import tech.alexontest.poftutor.pages.SearchResultsPage;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.awaitility.Awaitility.await;
 import static tech.alexontest.poftutor.infrastructure.HttpTools.assertLinkIsNotBroken;
 
 public class WidgetSteps {
@@ -30,8 +26,6 @@ public class WidgetSteps {
 
     private final MetaWidgetBlock metaWidgetBlock;
 
-    private final SearchResultsPage searchResultsPage;
-
     private final SearchResultsSteps searchResultsSteps;
 
     @Inject
@@ -40,14 +34,12 @@ public class WidgetSteps {
                        final CategoriesWidgetBlock categoriesWidgetBlock,
                        final ArchivesWidgetBlock archivesWidgetBlock,
                        final MetaWidgetBlock metaWidgetBlock,
-                       final SearchResultsPage searchResultsPage,
                        final SearchResultsSteps searchResultsSteps) {
         this.searchWidgetBlock = searchWidgetBlock;
         this.tagCloudWidgetBlock = tagCloudWidgetBlock;
         this.categoriesWidgetBlock = categoriesWidgetBlock;
         this.archivesWidgetBlock = archivesWidgetBlock;
         this.metaWidgetBlock = metaWidgetBlock;
-        this.searchResultsPage = searchResultsPage;
         this.searchResultsSteps = searchResultsSteps;
     }
 
@@ -79,11 +71,6 @@ public class WidgetSteps {
      */
     public SearchResultsSteps searchByEnter(final String searchText) {
         searchWidgetBlock.searchByEnter(searchText);
-        await(String.format("Search results failed to load for %s", searchText))
-                .atMost(5, TimeUnit.SECONDS)
-                .ignoreException(NoSuchElementException.class)
-                .untilAsserted(() -> assertThat(searchResultsPage.getPageTitle())
-                        .contains(searchText));
         return searchResultsSteps;
     }
 
