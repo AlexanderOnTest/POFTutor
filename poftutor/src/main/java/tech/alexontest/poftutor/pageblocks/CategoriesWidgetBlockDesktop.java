@@ -34,6 +34,7 @@ public class CategoriesWidgetBlockDesktop extends AbstractDefinedBlock implement
     public List<String> getCategories() {
         return categories.stream()
                 .map(WebElement::getText)
+                .map(String::trim)
                 .collect(Collectors.toList());
     }
 }

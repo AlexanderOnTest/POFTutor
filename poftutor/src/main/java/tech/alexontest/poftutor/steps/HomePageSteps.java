@@ -66,7 +66,7 @@ public class HomePageSteps {
     public void assertThatFooterTextIsCorrect() {
         assertThat(homePage.getFooterText())
                 .as("FooterText is not as expected.")
-                .isEqualTo("© 2018 | Proudly Powered by WordPress | Theme: Nisarg");
+                .isEqualToIgnoringWhitespace("© 2018 | Proudly Powered by WordPress | Theme: Nisarg");
     }
 
     public void assertThatFooterLinksAreNotBroken() {

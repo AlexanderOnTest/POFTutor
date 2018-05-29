@@ -4,27 +4,26 @@
     {
       "browserName": "firefox",
       "maxInstances": 5,
-      "seleniumProtocol": "WebDriver"
+      "seleniumProtocol": "WebDriver",
+      "webdriver.gecko.driver": "C:/Grid/geckodriver.exe"
     },
     {
       "browserName": "chrome",
       "maxInstances": 5,
-      "seleniumProtocol": "WebDriver"
+      "seleniumProtocol": "WebDriver",
+      "webdriver.chrome.driver": "C:/Grid/chromedriver.exe"
     },
     {
       "browserName": "internet explorer",
       "maxInstances": 5,
-      "seleniumProtocol": "WebDriver"
-    },
-	{
+      "seleniumProtocol": "WebDriver",
+      "webdriver.ie.driver": "C:/Grid/IEDriverServer.exe"
+    },	
+    {
       "browserName": "MicrosoftEdge",
       "maxInstances": 5,
-      "seleniumProtocol": "WebDriver"
-    },
-    {
-      "browserName": "blinkOpera",
-      "maxInstances": 5,
-      "seleniumProtocol": "WebDriver"
+      "seleniumProtocol": "WebDriver",
+      "webdriver.edge.driver": "C:/Grid/MicrosoftWebDriver.exe"
     }
   ],
   "proxy": "org.openqa.grid.selenium.proxy.DefaultRemoteProxy",

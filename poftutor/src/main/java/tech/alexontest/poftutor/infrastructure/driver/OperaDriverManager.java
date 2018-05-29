@@ -10,7 +10,7 @@ import java.io.IOException;
 
 public final class OperaDriverManager extends AbstractDriverManager implements WebDriverManager {
 
-    private static final String OPERA_VERSION = "51.0.2830.55";
+    private static final String OPERA_VERSION = "52.0.2871.64";
 
     private OperaDriverService operaDriverService;
 

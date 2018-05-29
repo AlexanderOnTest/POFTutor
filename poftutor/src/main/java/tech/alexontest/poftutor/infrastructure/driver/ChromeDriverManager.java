@@ -1,5 +1,6 @@
 package tech.alexontest.poftutor.infrastructure.driver;
 
+import org.openqa.selenium.Platform;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -18,12 +19,19 @@ public final class ChromeDriverManager extends AbstractDriverManager implements 
 
     private final boolean isHeadless;
 
+    private final Platform platform;
+
     ChromeDriverManager(final boolean isLocal, final boolean isHeadless) {
+        this(isLocal, isHeadless, Platform.WIN10);
+    }
+
+    ChromeDriverManager(final boolean isLocal, final boolean isHeadless, final Platform platform) {
         final String path = getClass().getClassLoader().getResource("chromedriver.exe").getPath();
         chromedriverExe = new File(path);
         System.setProperty("webdriver.chrome.driver", path);
         this.isLocal = isLocal;
         this.isHeadless = isHeadless;
+        this.platform = platform;
     }
 
     @Override
@@ -56,14 +64,13 @@ public final class ChromeDriverManager extends AbstractDriverManager implements 
     @Override
     public String createDriver() {
         final ChromeOptions options = new ChromeOptions()
+                .setHeadless(isHeadless)
                 .addArguments("--test-type", "--start-maximized");
+        options.setCapability("platform", platform);
         // add additional required options here
         if (!isLocal) {
             setDriver(new RemoteWebDriver(getGridUrl(), options));
         } else {
-            if (isHeadless) {
-                options.addArguments("--headless", "--disable-gpu");
-            }
             setDriver(new ChromeDriver(chromeDriverService, options));
         }
         System.out.println("ChromeDriver Started");
