@@ -20,7 +20,10 @@ import com.google.inject.Provider;
 import org.openqa.selenium.Platform;
 import tech.alexontest.poftutor.infrastructure.configuration.TestConfiguration;
 
+import java.net.URL;
+
 public final class DriverManagerFactory implements Provider<WebDriverManager> {
+    private static URL gridUrl;
 
     private final TestConfiguration testConfiguration;
 
@@ -28,6 +31,10 @@ public final class DriverManagerFactory implements Provider<WebDriverManager> {
 
     DriverManagerFactory(final TestConfiguration testConfiguration) {
         this.testConfiguration = testConfiguration;
+    }
+
+    static void setGridUrl(final URL gridUrl) {
+        DriverManagerFactory.gridUrl = gridUrl;
     }
 
     @SuppressWarnings("CyclomaticComplexity")
@@ -41,59 +48,59 @@ public final class DriverManagerFactory implements Provider<WebDriverManager> {
 
         switch (type) {
             case CHROME:
-                driverManager = new ChromeDriverManager(false, false);
+                driverManager = new ChromeDriverManager(gridUrl, Platform.WIN10);
                 break;
 
             case CHROME_LOCAL:
-                driverManager = new ChromeDriverManager(true, false);
+                driverManager = new ChromeDriverManager(false);
                 break;
 
             case CHROME_LOCAL_HEADLESS:
-                driverManager = new ChromeDriverManager(true, true);
+                driverManager = new ChromeDriverManager(true);
                 break;
 
             case CHROME_MACOS:
-                driverManager = new ChromeDriverManager(false, false, Platform.MAC);
+                driverManager = new ChromeDriverManager(gridUrl, Platform.MAC);
                 break;
 
             case EDGE:
-                driverManager = new EdgeDriverManager(false);
+                driverManager = new EdgeDriverManager(gridUrl);
                 break;
 
             case EDGE_LOCAL:
-                driverManager = new EdgeDriverManager(true);
+                driverManager = new EdgeDriverManager();
                 break;
 
             case FIREFOX:
-                driverManager = new FirefoxDriverManager(false, false);
+                driverManager = new FirefoxDriverManager(gridUrl, Platform.WIN10);
                 break;
 
             case FIREFOX_LOCAL:
-                driverManager = new FirefoxDriverManager(true, false);
+                driverManager = new FirefoxDriverManager(false);
                 break;
 
             case FIREFOX_LOCAL_HEADLESS:
-                driverManager = new FirefoxDriverManager(true, true);
+                driverManager = new FirefoxDriverManager(true);
                 break;
 
             case FIREFOX_MACOS:
-                driverManager = new FirefoxDriverManager(false, false, "MAC");
+                driverManager = new FirefoxDriverManager(gridUrl, Platform.MAC);
                 break;
 
             case IE:
-                driverManager = new InternetExplorerDriverManager(false);
+                driverManager = new InternetExplorerDriverManager(gridUrl);
                 break;
 
             case IE_LOCAL:
-                driverManager = new InternetExplorerDriverManager(true);
+                driverManager = new InternetExplorerDriverManager();
                 break;
 
             case OPERA_LOCAL:
-                driverManager = new OperaDriverManager(true);
+                driverManager = new OperaDriverManager();
                 break;
 
             case SAFARI_MACOS:
-                driverManager = new SafariDriverManager(false, false);
+                driverManager = new SafariDriverManager(gridUrl);
                 break;
 
             default:

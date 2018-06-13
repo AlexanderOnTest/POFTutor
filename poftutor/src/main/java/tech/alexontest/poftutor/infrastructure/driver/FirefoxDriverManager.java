@@ -25,6 +25,7 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 
 public final class FirefoxDriverManager extends AbstractDriverManager implements WebDriverManager {
 
@@ -36,17 +37,25 @@ public final class FirefoxDriverManager extends AbstractDriverManager implements
 
     private final boolean isHeadless;
 
-    private final String platform;
+    private final Platform platform;
 
-    FirefoxDriverManager(final boolean isLocal, final boolean isHeadless) {
-        this(isLocal, isHeadless, "WIN10");
+    FirefoxDriverManager(final boolean isHeadless) {
+        this(true, isHeadless, null, Platform.WIN10);
     }
 
-    FirefoxDriverManager(final boolean isLocal, final boolean isHeadless, final String platform) {
-        final String path = getClass().getClassLoader().getResource("geckodriver.exe").getPath();
-        geckoDriverExe = new File(path);
-        System.setProperty("webdriver.gecko.driver", path);
+    FirefoxDriverManager(final URL gridUrl, final Platform platform) {
+        this(false, false, gridUrl, platform);
+    }
+
+    FirefoxDriverManager(final boolean isLocal,
+                         final boolean isHeadless,
+                         final URL gridUrl,
+                         final Platform platform) {
+        super(gridUrl);
         this.isLocal = isLocal;
+        final String path = getClass().getClassLoader().getResource("geckodriver.exe").getPath();
+        System.setProperty("webdriver.gecko.driver", path);
+        geckoDriverExe = new File(path);
         this.isHeadless = isHeadless;
         this.platform = platform;
     }
@@ -86,7 +95,7 @@ public final class FirefoxDriverManager extends AbstractDriverManager implements
         //to stop the debug spam
         // add additional options here as required
         if (!isLocal) {
-            if (!Platform.WIN10.toString().equals(platform)) {
+            if (!Platform.WIN10.equals(platform)) {
                 // This is messy but sending platform WIN10 fails so only set for MacOs
                 options.setCapability("platform", platform);
             }

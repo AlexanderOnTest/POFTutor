@@ -24,6 +24,7 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 
 public final class ChromeDriverManager extends AbstractDriverManager implements WebDriverManager {
 
@@ -37,11 +38,19 @@ public final class ChromeDriverManager extends AbstractDriverManager implements 
 
     private final Platform platform;
 
-    ChromeDriverManager(final boolean isLocal, final boolean isHeadless) {
-        this(isLocal, isHeadless, Platform.WIN10);
+    ChromeDriverManager(final boolean isHeadless) {
+        this(true, isHeadless, null, Platform.WIN10);
     }
 
-    ChromeDriverManager(final boolean isLocal, final boolean isHeadless, final Platform platform) {
+    ChromeDriverManager(final URL gridUrl, final Platform platform) {
+        this(false, false, gridUrl, platform);
+    }
+
+    ChromeDriverManager(final boolean isLocal,
+                        final boolean isHeadless,
+                        final URL gridUrl,
+                        final Platform platform) {
+        super(gridUrl);
         final String path = getClass().getClassLoader().getResource("chromedriver.exe").getPath();
         chromedriverExe = new File(path);
         System.setProperty("webdriver.chrome.driver", path);

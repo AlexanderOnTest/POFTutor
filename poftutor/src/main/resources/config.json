@@ -4,5 +4,6 @@
     "value" : "5",
     "unit" : "SECONDS"
   },
+  "gridUrl" : "http://192.168.0.12:4444/wd/hub",
   "driverType" : "CHROME"
 }
