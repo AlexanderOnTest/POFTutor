@@ -59,3 +59,4 @@ fabric.properties
 /poftutor.iml
 build/
 !/src/main/resources/selenium-server-standalone-3.12.0.jar
+!/config/checkstyle/checkstyle.xml
