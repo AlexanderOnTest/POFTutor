@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package tech.alexontest.poftutor.webdriver;
+package tech.alexontest.poftutor.infrastructure.driver;
 
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -22,8 +22,7 @@ import org.junit.jupiter.params.provider.EnumSource;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import tech.alexontest.poftutor.infrastructure.AbstractCrossBrowserTest;
-import tech.alexontest.poftutor.infrastructure.driver.DriverManagerFactory;
-import tech.alexontest.poftutor.infrastructure.driver.DriverType;
+import tech.alexontest.poftutor.infrastructure.configuration.TestConfigurationFactory;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -41,6 +40,8 @@ class DriverFactoryTests extends AbstractCrossBrowserTest {
     //  Match a set of values e.g. run all local browsers only.
     //@EnumSource(value = DriverType.class, mode = MATCH_ALL, names = "^.*FIREFOX.*$")
     void driverFactoryWorks(final DriverType driverType) {
+        // have to get the URL of the grid from config.json and set it in the DriverManagerFactory
+        DriverManagerFactory.setGridUrl(TestConfigurationFactory.getTestConfiguration().getGridUrl());
         final String browserName = driverType.getWebdriverName();
 
         setDriverManager(DriverManagerFactory.getManager(driverType));
