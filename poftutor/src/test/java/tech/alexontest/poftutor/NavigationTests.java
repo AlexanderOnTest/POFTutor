@@ -20,7 +20,7 @@ import com.google.inject.Inject;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import tech.alexontest.poftutor.infrastructure.AbstractSingleWebDriverTest;
+import tech.alexanderontest.guicefactory.infrastructure.AbstractSingleWebDriverTest;
 import tech.alexontest.poftutor.steps.HomePageSteps;
 
 @Tag("Navigation")

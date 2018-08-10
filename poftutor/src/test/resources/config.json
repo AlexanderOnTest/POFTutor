@@ -1,0 +1,9 @@
+{
+  "homePageUrl" : "https://alexanderontesting.com/",
+  "waitTimeout" : {
+    "value" : "5",
+    "unit" : "SECONDS"
+  },
+  "gridUrl" : "http://192.168.0.9:4444/wd/hub",
+  "driverType" : "CHROME_MACOS"
+}
