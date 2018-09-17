@@ -29,6 +29,7 @@ public class DriverFactoryModule extends AbstractModule {
 
     public DriverFactoryModule() {
         this.testConfiguration = TestConfigurationFactory.getTestConfiguration();
+        DriverManagerFactory.setGridUrl(testConfiguration.getGridUrl());
         this.driverManagerFactory = new DriverManagerFactory(this.testConfiguration);
     }
 

@@ -19,45 +19,30 @@ package tech.alexontest.poftutor.infrastructure.driver;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariOptions;
 
+import java.net.URL;
+
 public final class SafariDriverManager extends AbstractDriverManager implements WebDriverManager {
 
-    private final boolean isLocal;
-
-    private final boolean isHeadless;
-
-    SafariDriverManager(final boolean isLocal, final boolean isHeadless) {
-        this.isLocal = isLocal;
-        this.isHeadless = isHeadless;
+    SafariDriverManager(final URL gridUrl) {
+        super(gridUrl);
     }
 
     @Override
     public void startService() {
-        if (isLocal) {
-            throw new UnsupportedOperationException("Local running is only supported on Microsoft Windows."
-                    + " Please use the grid.");
-        }
+        // Do nothing: Service is only required for local running - not supported.
     }
 
     @Override
     public void stopService() {
-        if (isLocal) {
-            throw new UnsupportedOperationException("Local running is only supported on Microsoft Windows."
-                    + " Please use the grid.");
-        }
+        // Do nothing: Service is only required for local running - not supported.
     }
 
     @Override
     public String createDriver() {
         final SafariOptions options = new SafariOptions();
         // add additional options here as required
-        if (!isLocal) {
-            setDriver(new RemoteWebDriver(getGridUrl(), options));
-            options.setCapability("platform", "MAC");
-        } else {
-            if (isHeadless) {
-                throw new UnsupportedOperationException("Safari does not support headless testing.");
-            }
-        }
+        setDriver(new RemoteWebDriver(getGridUrl(), options));
+        options.setCapability("platform", "MAC");
         System.out.println("SafariDriver Started");
         get().manage().window().maximize();
         return options.getBrowserName();

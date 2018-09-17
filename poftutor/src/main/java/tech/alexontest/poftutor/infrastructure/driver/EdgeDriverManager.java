@@ -23,6 +23,7 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 
 public final class EdgeDriverManager extends AbstractDriverManager implements WebDriverManager {
 
@@ -32,11 +33,18 @@ public final class EdgeDriverManager extends AbstractDriverManager implements We
 
     private final boolean isLocal;
 
-    EdgeDriverManager(final boolean isLocal) {
+    EdgeDriverManager(final URL gridUrl) {
+        super(gridUrl);
+        edgeDriverExe = null;
+        this.isLocal = false;
+    }
+
+    EdgeDriverManager() {
+        super(null);
         final String path = getClass().getClassLoader().getResource("MicrosoftWebDriver.exe").getPath();
         edgeDriverExe = new File(path);
         System.setProperty("webdriver.edge.driver", path);
-        this.isLocal = isLocal;
+        this.isLocal = true;
     }
 
     @Override

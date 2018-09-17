@@ -19,10 +19,14 @@ package tech.alexontest.poftutor.infrastructure.configuration;
 import org.awaitility.Duration;
 import tech.alexontest.poftutor.infrastructure.driver.DriverType;
 
+import java.net.URL;
+
 public interface TestConfiguration {
     String getHomePageUrl();
 
     Duration getWaitTimeout();
+
+    URL getGridUrl();
 
     DriverType getDriverType();
 }

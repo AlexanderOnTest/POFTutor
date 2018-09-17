@@ -23,6 +23,7 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 
 public final class InternetExplorerDriverManager extends AbstractDriverManager implements WebDriverManager {
 
@@ -32,11 +33,18 @@ public final class InternetExplorerDriverManager extends AbstractDriverManager i
 
     private final boolean isLocal;
 
-    InternetExplorerDriverManager(final boolean isLocal) {
+    InternetExplorerDriverManager() {
+        super(null);
         final String path = getClass().getClassLoader().getResource("IEDriverServer.exe").getPath();
         internetExplorerDriverExe = new File(path);
         System.setProperty("webdriver.ie.driver", path);
-        this.isLocal = isLocal;
+        this.isLocal = true;
+    }
+
+    InternetExplorerDriverManager(final URL gridUrl) {
+        super(gridUrl);
+        internetExplorerDriverExe = null;
+        this.isLocal = false;
     }
 
     @Override

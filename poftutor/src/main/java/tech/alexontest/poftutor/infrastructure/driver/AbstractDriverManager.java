@@ -18,7 +18,6 @@ package tech.alexontest.poftutor.infrastructure.driver;
 
 import org.openqa.selenium.WebDriver;
 
-import java.net.MalformedURLException;
 import java.net.URL;
 
 public abstract class AbstractDriverManager implements WebDriverManager {
@@ -26,12 +25,8 @@ public abstract class AbstractDriverManager implements WebDriverManager {
 
     private URL gridUrl;
 
-    AbstractDriverManager() {
-        try {
-            gridUrl = new URL("http://SILENTHTPC:4444/wd/hub");
-        } catch (final MalformedURLException e) {
-            e.printStackTrace();
-        }
+    AbstractDriverManager(final URL gridURL) {
+        this.gridUrl = gridURL;
     }
 
     /**

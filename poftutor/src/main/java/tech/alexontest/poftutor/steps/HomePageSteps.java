@@ -74,9 +74,9 @@ public class HomePageSteps {
                 .isLessThanOrEqualTo(MAX_POSTS_PER_LISTING_PAGE);
     }
 
-    public void assertThatPageContainsFiveWidgets() {
+    public void assertThatPageContainsAtLeastFiveWidgets() {
         assertThat(homePage.getWidgetCount())
-                .isEqualTo(WIDGETS_PER_PAGE);
+                .isGreaterThanOrEqualTo(WIDGETS_PER_PAGE);
     }
 
     public void assertThatFooterTextIsCorrect() {

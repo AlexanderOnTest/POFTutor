@@ -19,10 +19,14 @@ package tech.alexontest.poftutor.infrastructure.configuration;
 import org.awaitility.Duration;
 import tech.alexontest.poftutor.infrastructure.driver.DriverType;
 
+import java.net.URL;
+
 public class TestConfigurationImpl implements TestConfiguration {
     private String homePageUrl;
 
     private Duration waitTimeout;
+
+    private URL gridUrl;
 
     private DriverType driverType;
 
@@ -34,6 +38,11 @@ public class TestConfigurationImpl implements TestConfiguration {
     @Override
     public Duration getWaitTimeout() {
         return waitTimeout;
+    }
+
+    @Override
+    public URL getGridUrl() {
+        return gridUrl;
     }
 
     @Override
