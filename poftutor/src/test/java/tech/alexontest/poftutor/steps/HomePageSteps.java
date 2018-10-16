@@ -60,12 +60,12 @@ public class HomePageSteps {
     public void assertThatBrowserTabPageTitleIsCorrect() {
         assertThat(webDriver.getTitle())
                 .as("Reported browser tab page title is not as expected")
-                .isEqualTo(homePage.getBrowserTabPageTitle());
+                .isEqualToIgnoringCase(homePage.getBrowserTabPageTitle());
     }
 
     public void assertThatTitleIsCorrect() {
         assertThat(homePage.getSiteTitle())
-                .isEqualToIgnoringCase("Alexander on Testing");
+                .isEqualToIgnoringCase("Alexander on Test");
     }
 
     public void assertThatPageContainsUpToFiveArticles() {

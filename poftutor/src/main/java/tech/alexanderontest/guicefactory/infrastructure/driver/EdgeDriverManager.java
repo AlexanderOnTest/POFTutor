@@ -25,7 +25,8 @@ public final class EdgeDriverManager extends AbstractDriverManager implements We
 
     EdgeDriverManager() {
         super(null);
-        final String path = getClass().getClassLoader().getResource("MicrosoftWebDriver.exe").getPath();
+        // for Windows 10 version 1809 and later - this shouldn't be needed, but it's not being picked up from PATH
+        final String path = "C:\\Windows\\System32\\MicrosoftWebDriver.exe";
         edgeDriverExe = new File(path);
         System.setProperty("webdriver.edge.driver", path);
         this.isLocal = true;

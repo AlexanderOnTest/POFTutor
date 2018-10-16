@@ -104,7 +104,6 @@ public class WidgetSteps {
                 "Selenium",
                 "Selenium WebDriver",
                 "JUnit5",
-                "JUnit 5",
                 "Java");
         assertThat(mostImportantTags)
                 .as("The most important Tags are prominent")

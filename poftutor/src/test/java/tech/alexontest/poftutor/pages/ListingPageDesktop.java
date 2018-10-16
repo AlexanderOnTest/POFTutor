@@ -55,7 +55,7 @@ public class ListingPageDesktop extends AbstractPage implements ListingPage {
 
     @Override
     public String getBrowserTabPageTitle() {
-        return "Alexander on Testing – Adventures in Software Testing";
+        return "Alexander on Test – Adventures in Software Testing and Automation";
     }
 
     @Override

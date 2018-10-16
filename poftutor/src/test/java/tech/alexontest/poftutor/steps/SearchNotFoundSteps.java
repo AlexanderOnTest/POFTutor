@@ -53,7 +53,7 @@ public class SearchNotFoundSteps {
 
     public SearchNotFoundSteps verifyPageTitle() {
         await("Unsuccessful search results failed to load.")
-                .atMost(testConfiguration.getWaitTimeout())
+                .atMost(testConfiguration.getWaitTimeout().multiply(3))
                 .ignoreExceptionsMatching(anyOf(
                         instanceOf(NoSuchElementException.class),
                         instanceOf(StaleElementReferenceException.class)))
