@@ -77,5 +77,6 @@ test {
     options {
         setExcludeTags(["Framework", "Blocking"] as Set)
     }
+    // Edge cannot support parallel local testing, comment the below out if using EDGE_LOCAL
     maxParallelForks 4
 }
