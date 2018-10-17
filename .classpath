@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="poftutor/src/main/java"/>
+	<classpathentry kind="src" path="poftutor/src/test/java"/>
+	<classpathentry kind="lib" path=".idea/shelf/FIRING_UP_A_WEBDRIVER_IN_A_JUNIT_TEST__Part_1/gradle-wrapper.jar"/>
+	<classpathentry kind="lib" path="poftutor/gradle/wrapper/gradle-wrapper.jar"/>
+	<classpathentry kind="output" path="poftutor/build/classes/java/main"/>
+</classpath>
