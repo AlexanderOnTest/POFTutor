@@ -5,25 +5,25 @@
       "browserName": "firefox",
       "maxInstances": 5,
       "seleniumProtocol": "WebDriver",
-      "webdriver.gecko.driver": "C:/Grid/geckodriver.exe"
+      "webdriver.gecko.driver": "C:/src/Grid/geckodriver.exe"
     },
     {
       "browserName": "chrome",
       "maxInstances": 5,
       "seleniumProtocol": "WebDriver",
-      "webdriver.chrome.driver": "C:/Grid/chromedriver.exe"
+      "webdriver.chrome.driver": "C:/src/Grid/chromedriver.exe"
     },
     {
       "browserName": "internet explorer",
       "maxInstances": 5,
       "seleniumProtocol": "WebDriver",
-      "webdriver.ie.driver": "C:/Grid/IEDriverServer.exe"
+      "webdriver.ie.driver": "C:/src/Grid/IEDriverServer.exe"
     },	
     {
       "browserName": "MicrosoftEdge",
-      "maxInstances": 5,
+      "maxInstances": 1,
       "seleniumProtocol": "WebDriver",
-      "webdriver.edge.driver": "C:/Grid/MicrosoftWebDriver.exe"
+      "webdriver.edge.driver": "C:/src/Grid/MicrosoftWebDriver.exe"
     }
   ],
   "proxy": "org.openqa.grid.selenium.proxy.DefaultRemoteProxy",

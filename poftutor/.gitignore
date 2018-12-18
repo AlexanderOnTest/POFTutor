@@ -60,3 +60,4 @@ fabric.properties
 build/
 !/src/main/resources/selenium-server-standalone-3.12.0.jar
 !/config/checkstyle/checkstyle.xml
+!/src/test/resources/selenium-server-standalone-3.14.0.jar
